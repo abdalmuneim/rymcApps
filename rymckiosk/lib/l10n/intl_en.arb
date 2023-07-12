@@ -1,0 +1,58 @@
+{
+  "ar": "Arabic",
+  "en": "English",
+  "freeConsultation": "Fast and free medical advice",
+  "busy": "Busy",
+  "online": "Online",
+  "chooseLang": "Chooses Language",
+  "save": "Save",
+  "subTitle": "As a matter of social responsibility, Al-Razi Yanbu Medical Complex provides fast and reliable telemedicine consultation for the benefit of the community",
+  "start": "Start",
+  "continueToConsult": "Continue to consult remotely",
+  "introduceYourself": "Introduce Yourself",
+  "name": "Name",
+  "phoneNumber": "Phone Number",
+  "validPhone": "Your phone number require",
+  "valid": "Your name require",
+  "titleLoadCall": "Please wait, we are\nconnecting you to the doctor...",
+  "close": "Close",
+  "end": "End",
+  "thankYou": "Thank you",
+  "happyToUseOurService": "We are glad you benefited from the service",
+  "loadToBackMain": "You will be redirected to the main page within {date} seconds  ",
+  "@loadToBackMain": {
+    "placeholders": {
+      "date": {}
+    }
+  },
+  "mainPage": "Main Page",
+  "noInternetConnection": "No found Network connection please enable!",
+  "loginAdmin": "Login Admin",
+  "validPassword": "Your password require",
+  "password": "Password",
+  "enter": "Enter",
+  "notEXistsPass": "Not exists password!",
+  "areYouDoctor": "Are you Doctor?",
+  "areYouUser": "Are You User?",
+  "camera": "Camera",
+  "gallery": "Gallery",
+  "tackPhoto": "Tack Photo",
+  "phoneNotExists": "Phone not Exists",
+  "addDoctor": "Add Doctor",
+  "doctorName": "Doctor Name",
+  "imageRequired": "Image required",
+  "specialty": "Specialty",
+  "aboutDoctor": "About Doctor",
+  "imageNotLoaded": "Image not Loaded",
+  "errorLoaded": "Error loaded",
+  "thisImportantCommunicationRelatesToTheCorrectConditionOfThe": "This important communication relates to the correct condition of the patient",
+  "aCallComingFrom": "A call coming from {user}",
+  "@aCallComingFrom": {
+    "placeholders": {
+      "user": {}
+    }
+  },
+  "notFoundFcm": "not found FCM",
+  "noDoctorsYetWaitToAdd": "No doctors yet!, Wait to add",
+  "doctorNotAvailable": "Doctor not available"
+}

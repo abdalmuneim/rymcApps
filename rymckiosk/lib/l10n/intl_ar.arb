@@ -1,0 +1,58 @@
+{
+  "ar": "العربية",
+  "en": "الانجليزية",
+  "freeConsultation": "استشارة طبية سريعة ومجانية",
+  "busy": "مشغول",
+  "online": "اونلاين",
+  "chooseLang": "إختيار اللغة",
+  "save": "حفظ",
+  "subTitle": "من باب المسؤولية الاجتماعية يقدم مجمع الرازي ينبع الطبي استشارة طبية عن بعد تتسم بالسرعة والموثوقية ليستفيد منها المجتمع ",
+  "start": "البداية",
+  "continueToConsult": "استمر للاستشارة عن بعد",
+  "introduceYourself": "عرفنا عن نفسك",
+  "name": "الاسم",
+  "phoneNumber": "رقم الجوال",
+  "validPhone": "رقم الجوال مطلوب",
+  "valid": "الاسم مطلوب",
+  "titleLoadCall": "الرجاء الانتظار\nجاري توصيلك بالطبيب ...",
+  "close": "إغلاق",
+  "end": "إنهاء",
+  "thankYou": "شكرا لك",
+  "happyToUseOurService": "سعيدين باستفادتك من الخدمة",
+  "loadToBackMain": "جاري تحويلك للصفحة الرئيسية خلال {date} ثواني  ",
+  "@loadToBackMain": {
+    "placeholders": {
+      "date": {}
+    }
+  },
+  "mainPage": "الصفحة الرئيسية",
+  "noInternetConnection": "لا يوجد اتصال بالانترنت تحقق من تفعيله",
+  "loginAdmin": "دخول الادمن",
+  "validPassword": "الرقم السري مطلوب",
+  "password": "الرقم السري",
+  "enter": "دخول",
+  "notEXistsPass": "الرقم السري خاطئ",
+  "areYouDoctor": "هل انت طبيب؟",
+  "areYouUser": "هل انت مستخدم؟",
+  "camera": "الكاميرا",
+  "gallery": "المعرض",
+  "tackPhoto": "إلتقاط صورة",
+  "phoneNotExists": "الهاتف غير موجد",
+  "addDoctor": "إضافة طبيب",
+  "doctorName": "إسم الطبيب",
+  "imageRequired": "الصوره مطلوبة",
+  "specialty": "التخصص",
+  "aboutDoctor": "نبذه عن الدكتور",
+  "imageNotLoaded": "لم يتم تحميل الصوره",
+  "errorLoaded": "خطاء في التحميل",
+  "thisImportantCommunicationRelatesToTheCorrectConditionOfThe": "هذا اتصال هام يتعلق بالحاله الصحيحيه للمريض",
+  "aCallComingFrom": "اتصال قادم من {user}",
+  "@aCallComingFrom": {
+    "placeholders": {
+      "user": {}
+    }
+  },
+  "notFoundFcm": "لم يتم العثور علي مستخدم",
+  "noDoctorsYetWaitToAdd": "لم يتم اضافة اي دكتور، انتظر حتي يتم الاضافة",
+  "doctorNotAvailable": "الدكتورغير متاح"
+}

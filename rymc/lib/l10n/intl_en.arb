@@ -1,0 +1,35 @@
+{
+  "validPhone": "Your phone number require",
+  "validName": "Your name require",
+  "compoundAlrazyMedical": "مجمع الرازي ينبع الطبي",
+  "yourDoorToGetService": "بوابتك للحصول على الخدمة المميزة",
+  "start": "Start",
+  "phoneNumber": "Phone number",
+  "sendValidateCode": "Send validate code",
+  "validateCodeNumber": "رقم التحقق خطاء",
+  "verificationCode": "رمز التحقق",
+  "verification": "تحقق",
+  "requiredField": "هذا الحقل مطلوب",
+  "name": "الاسم الثلاثي",
+  "nationalID": "رقم الهوية الوطنية",
+  "continuo": "Continuo",
+  "checkAllFields": "تحقق من جميع العقول",
+  "welcome": "اهلا",
+  "homeTitle": "تمكنك هذه العضوية من الحصول على مميزات فريدة لك ولافراد أسرتك ",
+  "welcomeClient": "اهلا عميل التميز",
+  "familyMembers": "أفراد العائلة",
+  "addFamilyMember": "أضف أفراد أسرتك",
+  "greatClint": "عميل التميز",
+  "addAnotherFamilyMember": "أضف فرد أخر من الأسرة",
+  "additionFamilyMember": "إضافة أفراد الأسرة",
+  "memberIsAlreadyExists": "{member} is Already Exists",
+  "@memberIsAlreadyExists": {
+    "placeholder": {
+      "member": {}
+    }
+  },
+  "save": "Save",
+  "delete": "Delete",
+  "addFamilyFromMember": "إضافة فرد من الأسرة",
+  "homePage": "الصفحة الرئيسية"
+}
