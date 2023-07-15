@@ -12,6 +12,7 @@ import 'package:rymc/generated/assets/assets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:rymc/generated/l10n.dart';
 import 'package:sizer/sizer.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -22,6 +23,7 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   late HomeProvider read;
+  late HomeProvider watch;
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -30,6 +32,8 @@ class _HomeViewState extends State<HomeView> {
 
   init() {
     read = context.read<HomeProvider>();
+    watch = context.watch<HomeProvider>();
+    read.start();
   }
 
   @override
@@ -52,8 +56,8 @@ class _HomeViewState extends State<HomeView> {
                   text: S.of(context).welcome,
                   fontWeight: FontWeight.bold,
                 ),
-                subtitle: const CustomText(
-                  text: "محمد الحسن",
+                subtitle: CustomText(
+                  text: watch.user.name ?? "",
                   fontWeight: FontWeight.bold,
                 ),
                 trailing: Padding(
@@ -61,6 +65,9 @@ class _HomeViewState extends State<HomeView> {
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
+                      IconButton(
+                          onPressed: () => read.logOut(),
+                          icon: Icon(Icons.logout)),
                       InkWell(
                           onTap: () {},
                           customBorder: const CircleBorder(),
@@ -121,14 +128,18 @@ class _HomeViewState extends State<HomeView> {
                           3.h.sh,
 
                           /// qr
-                          Image.asset(
-                            Assets.assetsImagesQr,
+                          QrImageView(
+                            data:
+                                " name:${watch.user.name}\n phone:${watch.user.phone}\n nationalId:${watch.user.nationalId}",
+                            version: QrVersions.auto,
+                            size: 320,
+                            gapless: false,
                           ),
                           3.h.sh,
 
                           /// user name
                           CustomText(
-                            text: "محمد منصور الحسن",
+                            text: watch.user.name ?? "",
                             color: AppColors.white,
                             fontWeight: FontWeight.bold,
                             fontSize: 18.sp,
@@ -137,7 +148,7 @@ class _HomeViewState extends State<HomeView> {
 
                           /// user name
                           CustomText(
-                            text: "0123456789",
+                            text: watch.user.phone ?? "",
                             color: AppColors.white,
                             fontWeight: FontWeight.bold,
                             fontSize: 18.sp,
@@ -159,8 +170,8 @@ class _HomeViewState extends State<HomeView> {
                               color: AppColors.white,
                               fontWeight: FontWeight.bold,
                             ),
-                            const CustomText(
-                              text: "محمد منصور الحسن",
+                            CustomText(
+                              text: watch.user.name ?? "",
                               color: AppColors.white,
                               fontWeight: FontWeight.w600,
                             ),

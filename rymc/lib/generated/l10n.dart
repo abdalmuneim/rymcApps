@@ -359,6 +359,16 @@ class S {
       args: [],
     );
   }
+
+  /// `مرحبا بعودتك`
+  String get welcomeBack {
+    return Intl.message(
+      'مرحبا بعودتك',
+      name: 'welcomeBack',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

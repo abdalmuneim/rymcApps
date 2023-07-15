@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:http/http.dart' as http;
@@ -43,12 +44,12 @@ class FCMNotificationFirebase implements IFCMNotificationFirebase {
     );
 
     if (settings.authorizationStatus == AuthorizationStatus.authorized) {
-      print("User granted permission");
+      log("User granted permission");
     } else if (settings.authorizationStatus ==
         AuthorizationStatus.provisional) {
-      print("User granted provisional permission");
+      log("User granted provisional permission");
     } else {
-      print("User declined or has not accepted permission");
+      log("User declined or has not accepted permission");
     }
   }
 

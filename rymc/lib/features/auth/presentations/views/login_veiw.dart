@@ -20,8 +20,8 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-  late LoginProvider read;
-  late LoginProvider watch;
+  late LogInProvider read;
+  late LogInProvider watch;
 
   @override
   void initState() {
@@ -35,14 +35,14 @@ class _LoginViewState extends State<LoginView> {
   }
 
   init() async {
-    read = context.read<LoginProvider>();
-    watch = context.watch<LoginProvider>();
+    read = context.read<LogInProvider>();
+    watch = context.watch<LogInProvider>();
   }
 
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: ()async => false,
+      onWillPop: () async => false,
       child: Scaffold(
         body: Center(
           child: Form(

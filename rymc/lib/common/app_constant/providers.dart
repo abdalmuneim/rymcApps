@@ -20,7 +20,7 @@ class Providers {
     ChangeNotifierProvider(create: (_) => StartProvider()),
 
     /// LoginProvider
-    ChangeNotifierProvider(create: (_) => LoginProvider(sl())),
+    ChangeNotifierProvider(create: (_) => LogInProvider(sl())),
 
     /// OtpProvider
     ChangeNotifierProvider(create: (_) => OtpProvider(sl(), sl())),
@@ -29,7 +29,7 @@ class Providers {
     ChangeNotifierProvider(create: (_) => RegisterProvider(sl(), sl())),
 
     /// HomeProvider
-    ChangeNotifierProvider(create: (_) => HomeProvider()),
+    ChangeNotifierProvider(create: (_) => HomeProvider(sl(), sl())),
 
     /// FamilyMembersProvider
     ChangeNotifierProvider(create: (_) => FamilyMembersProvider()),

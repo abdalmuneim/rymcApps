@@ -68,6 +68,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "verification": MessageLookupByLibrary.simpleMessage("تحقق"),
         "verificationCode": MessageLookupByLibrary.simpleMessage("رمز التحقق"),
         "welcome": MessageLookupByLibrary.simpleMessage("اهلا"),
+        "welcomeBack": MessageLookupByLibrary.simpleMessage("مرحبا بعودتك"),
         "welcomeClient":
             MessageLookupByLibrary.simpleMessage("اهلا عميل التميز"),
         "yourDoorToGetService": MessageLookupByLibrary.simpleMessage(

@@ -14,4 +14,5 @@ class StoredKeys {
 
 class Collections {
   static String get Users => "Users";
+  static String get UsersData => "UsersData";
 }

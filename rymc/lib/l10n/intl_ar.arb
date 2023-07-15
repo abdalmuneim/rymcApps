@@ -34,5 +34,6 @@
   "homePage": "الصفحة الرئيسية",
   "addedSuccessfully": "تم الاضافة بنجاح",
   "otpCodeSent": "تم ارسال رمز التحقق انظر الرسائل",
-  "createdAccountSuccess": "تم انشاء الحساب بنجاح"
+  "createdAccountSuccess": "تم انشاء الحساب بنجاح",
+  "welcomeBack": "مرحبا بعودتك"
 }
