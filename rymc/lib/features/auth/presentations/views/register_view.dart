@@ -47,55 +47,57 @@ class _RegisterViewState extends State<RegisterView> {
         body: Center(
           child: Form(
             key: watch.globalKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Image.asset(
-                  Assets.assetsImagesLogo,
-                  width: 60.w,
-                ),
-                5.h.sh,
-                CustomText(
-                  text: S.of(context).name,
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.title,
-                ),
-                2.h.sh,
-                CustomTextFormField(
-                  controller: watch.nameTEXT,
-                  textAlign: TextAlign.center,
-                  width: 90.w,
-                  border: false,
-                  validator: (value) => AppValidator.validateFields(
-                      value, ValidationType.name, context),
-                ),
-                5.h.sh,
-                CustomText(
-                  text: S.of(context).nationalID,
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.title,
-                ),
-                2.h.sh,
-                CustomTextFormField(
-                  controller: watch.nationalIdTEXT,
-                  textAlign: TextAlign.center,
-                  width: 90.w,
-                  border: false,
-                  isNumberOnly: true,
-                  validator: (value) => AppValidator.validateFields(
-                      value, ValidationType.notEmpty, context),
-                ),
-                10.h.sh,
-                watch.isLoading
-                    ? const CircularProgressIndicator()
-                    : CustomElevatedButton(
-                        onPressed: () => read.register(),
-                        child: Text(
-                          S.of(context).continuo,
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    Assets.assetsImagesLogo,
+                    width: 60.w,
+                  ),
+                  5.h.sh,
+                  CustomText(
+                    text: S.of(context).name,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.title,
+                  ),
+                  2.h.sh,
+                  CustomTextFormField(
+                    controller: watch.nameTEXT,
+                    textAlign: TextAlign.center,
+                    width: 90.w,
+                    border: false,
+                    validator: (value) => AppValidator.validateFields(
+                        value, ValidationType.name, context),
+                  ),
+                  5.h.sh,
+                  CustomText(
+                    text: S.of(context).nationalID,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.title,
+                  ),
+                  2.h.sh,
+                  CustomTextFormField(
+                    controller: watch.nationalIdTEXT,
+                    textAlign: TextAlign.center,
+                    width: 90.w,
+                    border: false,
+                    isNumberOnly: true,
+                    validator: (value) => AppValidator.validateFields(
+                        value, ValidationType.notEmpty, context),
+                  ),
+                  10.h.sh,
+                  watch.isLoading
+                      ? const CircularProgressIndicator()
+                      : CustomElevatedButton(
+                          onPressed: () => read.register(),
+                          child: Text(
+                            S.of(context).continuo,
+                          ),
                         ),
-                      ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

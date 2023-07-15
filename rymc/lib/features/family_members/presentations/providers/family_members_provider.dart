@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rymc/common/routes/routes.dart';
 import 'package:rymc/common/services/navigation_services.dart';
-import 'package:rymc/features/auth/data/models/user_model.dart';
+import 'package:rymc/features/auth/data/model/user_model.dart';
 
 class FamilyMembersProvider extends ChangeNotifier {
   final BuildContext _context = NavigationService.context;
@@ -20,7 +20,6 @@ class FamilyMembersProvider extends ChangeNotifier {
     final result = await _context.pushNamed(
       RoutesStrings.editFamilyMembers,
       queryParams: {
-        "id": member.id.toString(),
         "name": member.name,
         "nationalId": member.nationalId,
       },

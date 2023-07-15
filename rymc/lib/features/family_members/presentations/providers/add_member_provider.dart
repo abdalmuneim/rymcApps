@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:rymc/common/services/navigation_services.dart';
 import 'package:rymc/common/utils/utils.dart';
-import 'package:rymc/features/auth/data/models/user_model.dart';
+import 'package:rymc/features/auth/data/model/user_model.dart';
 import 'package:rymc/features/family_members/presentations/providers/family_members_provider.dart';
 import 'package:rymc/generated/l10n.dart';
 
@@ -33,10 +33,7 @@ class AddMemberProvider extends ChangeNotifier {
             .families
             .add(
               UserModel(
-                id: Provider.of<FamilyMembersProvider>(_context, listen: false)
-                        .families
-                        .length +
-                    1,
+                
                 name: nameTEXT.text,
                 nationalId: nationalIdTEXT.text,
               ),

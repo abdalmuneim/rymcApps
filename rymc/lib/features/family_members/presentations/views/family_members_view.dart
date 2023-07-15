@@ -6,7 +6,7 @@ import 'package:rymc/common/utils/extension.dart';
 import 'package:rymc/common/widgets/custom_elevated_button.dart';
 import 'package:rymc/common/widgets/custom_list_tile.dart';
 import 'package:rymc/common/widgets/custom_text.dart';
-import 'package:rymc/features/auth/data/models/user_model.dart';
+import 'package:rymc/features/auth/data/model/user_model.dart';
 import 'package:rymc/features/family_members/presentations/providers/family_members_provider.dart';
 import 'package:rymc/generated/assets/assets.dart';
 import 'package:rymc/generated/l10n.dart';

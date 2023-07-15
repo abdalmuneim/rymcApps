@@ -7,7 +7,6 @@ ThemeData get applicationTheme => ThemeData(
       scaffoldBackgroundColor: AppColors.scaffoldColor,
 
       /// Main Color
-
       primaryColor: AppColors.primary,
       primaryColorLight: AppColors.lightBlue,
       primaryColorDark: Colors.black,
@@ -68,7 +67,6 @@ ThemeData get applicationTheme => ThemeData(
       ),
 
       /// Text Theme
-
       textTheme: TextTheme(
         //
         headlineLarge: GoogleFonts.tajawal(

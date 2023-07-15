@@ -329,6 +329,36 @@ class S {
       args: [],
     );
   }
+
+  /// `added SuccessFully`
+  String get addedSuccessfully {
+    return Intl.message(
+      'added SuccessFully',
+      name: 'addedSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Verification code sent see messages`
+  String get otpCodeSent {
+    return Intl.message(
+      'Verification code sent see messages',
+      name: 'otpCodeSent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `تم انشاء الحساب بنجاح`
+  String get createdAccountSuccess {
+    return Intl.message(
+      'تم انشاء الحساب بنجاح',
+      name: 'createdAccountSuccess',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

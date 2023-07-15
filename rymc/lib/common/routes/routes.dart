@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:rymc/features/auth/data/models/user_model.dart';
+import 'package:rymc/features/auth/data/model/user_model.dart';
 import 'package:rymc/features/auth/presentations/views/login_veiw.dart';
 import 'package:rymc/features/auth/presentations/views/otp_view.dart';
 import 'package:rymc/features/auth/presentations/views/register_view.dart';
@@ -92,13 +92,11 @@ class Routes {
         name: RoutesStrings.editFamilyMembers,
         path: RoutesStrings.editFamilyMembers,
         builder: (BuildContext context, GoRouterState state) {
-          String id = state.queryParams["id"] ?? "";
           String name = state.queryParams["name"] ?? "";
           String nationalId = state.queryParams["nationalId"] ?? "";
 
           return EditMemberView(
             member: UserModel(
-              id: int.parse(id),
               name: name,
               nationalId: nationalId,
             ),

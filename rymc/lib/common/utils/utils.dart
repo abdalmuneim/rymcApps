@@ -23,9 +23,10 @@ class Utils {
           return body;
         },
       );
-  static showSuccess(String message) {}
+  static showSuccess(String message) => showToast(message);
 
-  static showError(String message) {}
+  static showError(String message) =>
+      showToast(message, backgroundColor: AppColors.red);
 
   static showLottieDialog(
       {required String lottie, required String text, List<Widget>? action}) {}
@@ -46,8 +47,7 @@ class Utils {
             fontSize: 10.sp,
           ),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-          backgroundColor:
-              backgroundColor ?? AppColors.primary.withOpacity(0.7),
+          backgroundColor: backgroundColor ?? AppColors.black.withOpacity(0.7),
           padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
         ),
       );

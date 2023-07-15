@@ -41,48 +41,46 @@ class _OtpViewState extends State<OtpView> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async => false,
-      child: Scaffold(
-        body: Center(
-          child: Form(
-            key: watch.globalKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Image.asset(
-                  Assets.assetsImagesLogo,
-                  width: 60.w,
-                ),
-                5.h.sh,
-                CustomText(
-                  text: S.of(context).verificationCode,
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.title,
-                ),
-                2.h.sh,
-                CustomTextFormField(
-                  maxLength: AppConstants.codeLength,
-                  counterText: '',
-                  textAlign: TextAlign.center,
-                  width: 90.w,
-                  border: false,
-                  isNumberOnly: true,
-                  validator: (value) => AppValidator.validateFields(
-                      value, ValidationType.validationCode, context),
-                ),
-                10.h.sh,
-                watch.isLoading
-                    ? const CircularProgressIndicator()
-                    : CustomElevatedButton(
-                        onPressed: () => read.verificationCode(),
-                        child: Text(
-                          S.of(context).verification,
-                        ),
+    return Scaffold(
+      body: Center(
+        child: Form(
+          key: watch.globalKey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Image.asset(
+                Assets.assetsImagesLogo,
+                width: 60.w,
+              ),
+              5.h.sh,
+              CustomText(
+                text: S.of(context).verificationCode,
+                fontWeight: FontWeight.bold,
+                color: AppColors.title,
+              ),
+              2.h.sh,
+              CustomTextFormField(
+                maxLength: AppConstants.codeLength,
+                counterText: '',
+                textAlign: TextAlign.center,
+                controller: watch.codeTEXT,
+                width: 90.w,
+                border: false,
+                isNumberOnly: true,
+                validator: (value) => AppValidator.validateFields(
+                    value, ValidationType.validationCode, context),
+              ),
+              10.h.sh,
+              watch.isLoading
+                  ? const CircularProgressIndicator()
+                  : CustomElevatedButton(
+                      onPressed: () => read.verificationCode(),
+                      child: Text(
+                        S.of(context).verification,
                       ),
-              ],
-            ),
+                    ),
+            ],
           ),
         ),
       ),

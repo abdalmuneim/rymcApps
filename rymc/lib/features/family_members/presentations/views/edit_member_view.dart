@@ -6,7 +6,7 @@ import 'package:rymc/common/utils/extension.dart';
 import 'package:rymc/common/widgets/custom_elevated_button.dart';
 import 'package:rymc/common/widgets/custom_text.dart';
 import 'package:rymc/common/widgets/custom_text_form_field.dart';
-import 'package:rymc/features/auth/data/models/user_model.dart';
+import 'package:rymc/features/auth/data/model/user_model.dart';
 import 'package:rymc/features/family_members/presentations/providers/edit_member_provider.dart';
 import 'package:rymc/generated/l10n.dart';
 import 'package:sizer/sizer.dart';
@@ -29,7 +29,7 @@ class _EditMemberViewState extends State<EditMemberView> {
 
     watch.nameTEXT.text = widget.member.name ?? "";
     watch.nationalIdTEXT.text = widget.member.nationalId ?? "";
-    watch.id = widget.member.id ?? 0;
+    watch.nationalId = widget.member.nationalId ?? "";
     super.didChangeDependencies();
   }
 

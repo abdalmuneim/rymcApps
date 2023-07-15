@@ -6,7 +6,6 @@ import 'package:provider/provider.dart';
 import 'package:rymc/common/app_constant/providers.dart';
 import 'package:rymc/common/resources/theme_manager.dart';
 import 'package:rymc/common/routes/routes.dart';
-import 'package:rymc/firebase_option.dart';
 import 'package:rymc/generated/l10n.dart';
 import 'package:sizer/sizer.dart';
 import 'package:rymc/injection.dart' as di;
@@ -18,8 +17,8 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+      // options: DefaultFirebaseOptions.currentPlatform,
+      );
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   await di.init();
 
