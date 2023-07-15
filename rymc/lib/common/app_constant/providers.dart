@@ -9,23 +9,24 @@ import 'package:rymc/features/family_members/presentations/providers/family_memb
 import 'package:rymc/features/home/pressentations/providers/home_provider.dart';
 import 'package:rymc/features/splash/splash_provider.dart';
 import 'package:rymc/features/start/presentations/providers/home_provider.dart';
+import 'package:rymc/injection.dart';
 
 class Providers {
   static List<SingleChildWidget> providers = [
     /// SplashProvider
-    ChangeNotifierProvider(create: (_) => SplashProvider()),
+    ChangeNotifierProvider(create: (_) => SplashProvider(sl())),
 
     /// StartProvider
     ChangeNotifierProvider(create: (_) => StartProvider()),
 
     /// LoginProvider
-    ChangeNotifierProvider(create: (_) => LoginProvider()),
+    ChangeNotifierProvider(create: (_) => LoginProvider(sl())),
 
     /// OtpProvider
-    ChangeNotifierProvider(create: (_) => OtpProvider()),
+    ChangeNotifierProvider(create: (_) => OtpProvider(sl(), sl())),
 
     /// RegisterProvider
-    ChangeNotifierProvider(create: (_) => RegisterProvider()),
+    ChangeNotifierProvider(create: (_) => RegisterProvider(sl(), sl())),
 
     /// HomeProvider
     ChangeNotifierProvider(create: (_) => HomeProvider()),

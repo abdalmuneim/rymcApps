@@ -31,5 +31,8 @@
   "save": "Save",
   "delete": "Delete",
   "addFamilyFromMember": "إضافة فرد من الأسرة",
-  "homePage": "الصفحة الرئيسية"
+  "homePage": "الصفحة الرئيسية",
+  "addedSuccessfully": "added SuccessFully",
+  "otpCodeSent": "Verification code sent see messages",
+  "createdAccountSuccess": "تم انشاء الحساب بنجاح"
 }

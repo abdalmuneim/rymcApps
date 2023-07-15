@@ -12,11 +12,10 @@ class AppConstants {
         languageCode: "ar"),
   ];
 
-  static int timeOut = 30;
-  static int timeOutWaitDoctor = 60;
-  static int timeOutThank = 5;
+  static int timeOut = 60;
+  static String countryCode = "+20";
 
-  static int phoneLength = 9;
+  static int phoneLength = 10;
   static int codeLength = 6;
 }
 

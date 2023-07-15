@@ -4,17 +4,24 @@ import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rymc/common/routes/routes.dart';
 import 'package:rymc/common/services/navigation_services.dart';
+import 'package:rymc/features/auth/domain/use_cases/is_logged_in_use_case.dart';
 
 class SplashProvider extends ChangeNotifier {
-  SplashProvider();
+  IsLoggedInUseCase _isLoggedInUseCase;
+  SplashProvider(this._isLoggedInUseCase);
+
+  Future<bool> get isLoggedIn async => await _isLoggedInUseCase();
 
   Future<void> startTimer() async {
-    /// TODO: check if user loged in befor save his number in local and get user data from firebase
-    Timer(const Duration(seconds: 3), () async => await _navigate());
+    Timer(const Duration(seconds: 2), () async => await _navigate());
   }
 
   _navigate() async {
     final context = NavigationService.context;
-    context.pushReplacementNamed(RoutesStrings.start);
+    if (await isLoggedIn) {
+      context.pushReplacementNamed(RoutesStrings.home);
+    } else {
+      context.pushReplacement(RoutesStrings.start);
+    }
   }
 }

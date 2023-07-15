@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:rymc/common/services/navigation_services.dart';
-import 'package:rymc/features/auth/data/models/user_model.dart';
+import 'package:rymc/features/auth/data/model/user_model.dart';
 import 'package:rymc/features/family_members/presentations/providers/family_members_provider.dart';
 
 class EditMemberProvider extends ChangeNotifier {
@@ -13,17 +13,17 @@ class EditMemberProvider extends ChangeNotifier {
   bool get isLoading => _isLoading;
   final nameTEXT = TextEditingController();
   final nationalIdTEXT = TextEditingController();
-  late int id;
+  late String nationalId;
 
   editMemberToFamily() {
     _isLoading = true;
     notifyListeners();
     if (_globalKey.currentState!.validate()) {
       Provider.of<FamilyMembersProvider>(_context, listen: false).families[
-          Provider.of<FamilyMembersProvider>(_context, listen: false)
-              .families
-              .indexWhere((element) => element.id == id)] = UserModel(
-        id: id,
+              Provider.of<FamilyMembersProvider>(_context, listen: false)
+                  .families
+                  .indexWhere((element) => element.nationalId == nationalId)] =
+          UserModel(
         name: nameTEXT.text,
         nationalId: nationalIdTEXT.text,
       );

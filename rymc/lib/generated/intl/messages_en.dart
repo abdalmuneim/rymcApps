@@ -30,6 +30,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("إضافة فرد من الأسرة"),
         "addFamilyMember":
             MessageLookupByLibrary.simpleMessage("أضف أفراد أسرتك"),
+        "addedSuccessfully":
+            MessageLookupByLibrary.simpleMessage("added SuccessFully"),
         "additionFamilyMember":
             MessageLookupByLibrary.simpleMessage("إضافة أفراد الأسرة"),
         "checkAllFields":
@@ -37,6 +39,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "compoundAlrazyMedical":
             MessageLookupByLibrary.simpleMessage("مجمع الرازي ينبع الطبي"),
         "continuo": MessageLookupByLibrary.simpleMessage("Continuo"),
+        "createdAccountSuccess":
+            MessageLookupByLibrary.simpleMessage("تم انشاء الحساب بنجاح"),
         "delete": MessageLookupByLibrary.simpleMessage("Delete"),
         "familyMembers": MessageLookupByLibrary.simpleMessage("أفراد العائلة"),
         "greatClint": MessageLookupByLibrary.simpleMessage("عميل التميز"),
@@ -47,6 +51,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "name": MessageLookupByLibrary.simpleMessage("الاسم الثلاثي"),
         "nationalID":
             MessageLookupByLibrary.simpleMessage("رقم الهوية الوطنية"),
+        "otpCodeSent": MessageLookupByLibrary.simpleMessage(
+            "Verification code sent see messages"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone number"),
         "requiredField":
             MessageLookupByLibrary.simpleMessage("هذا الحقل مطلوب"),

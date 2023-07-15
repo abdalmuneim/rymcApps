@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rymc/common/utils/extension.dart';
 import 'package:rymc/features/splash/splash_provider.dart';
 import 'package:rymc/generated/assets/assets.dart';
 import 'package:provider/provider.dart';
@@ -25,10 +26,18 @@ class _SplashViewState extends State<SplashView> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Image.asset(
-          Assets.assetsImagesLogo,
-          width: 50.w,
-          height: 50.h,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Image.asset(
+              Assets.assetsImagesLogo,
+              width: 50.w,
+              height: 50.h,
+            ),
+            5.h.sh,
+            CircularProgressIndicator(),
+          ],
         ),
       ),
     );
