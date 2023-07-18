@@ -10,4 +10,5 @@ class RoutesStrings {
   static const familyMembers = '/familyMembers';
   static const addFamilyMembers = '/addFamilyMembers';
   static const editFamilyMembers = '/editFamilyMembers';
+  static const notification = '/notification';
 }

@@ -11,7 +11,7 @@ class CustomTextFormField extends StatefulWidget {
     this.labelText,
     this.prefixIcon,
     this.filled = true,
-    this.borderRadius = 20,
+    this.radius = 20,
     this.obscureText,
     this.border = true,
     this.suffixIcon,
@@ -36,18 +36,21 @@ class CustomTextFormField extends StatefulWidget {
     this.contentPadding,
     this.focusNode,
     this.onTap,
+    this.fillColor,
+    this.borderRadius,
   }) : super(key: key);
   final int? maxLines, minLines;
   final String? hintText, labelText;
   final Widget? prefixIcon, suffixIcon;
-  final Color prefixIconColor;
-  final Color suffixIconColor;
+  final Color? prefixIconColor;
+  final Color? suffixIconColor, fillColor;
   final bool? filled, obscureText;
   final bool border;
   final bool isNumberOnly;
   final bool? enabled;
   final TextAlign textAlign;
-  final double borderRadius;
+  final double radius;
+  final BorderRadius? borderRadius;
   final TextEditingController? controller;
   final TextDirection? textDirection;
   final TextInputType? keyboardType;
@@ -129,13 +132,15 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
               .bodyLarge!
               .copyWith(color: AppColors.red),
           filled: true,
-          fillColor: fillColor,
+          fillColor: widget.fillColor ?? fillColor,
           enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(widget.borderRadius),
+            borderRadius:
+                widget.borderRadius ?? BorderRadius.circular(widget.radius),
             borderSide: BorderSide.none,
           ),
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(widget.borderRadius),
+            borderRadius:
+                widget.borderRadius ?? BorderRadius.circular(widget.radius),
             borderSide: BorderSide.none,
           ),
         ),

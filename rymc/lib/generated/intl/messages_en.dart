@@ -42,6 +42,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "createdAccountSuccess":
             MessageLookupByLibrary.simpleMessage("تم انشاء الحساب بنجاح"),
         "delete": MessageLookupByLibrary.simpleMessage("Delete"),
+        "editFamilyFromMember":
+            MessageLookupByLibrary.simpleMessage("تعديل أفراد أسرتك"),
         "familyMembers": MessageLookupByLibrary.simpleMessage("أفراد العائلة"),
         "greatClint": MessageLookupByLibrary.simpleMessage("عميل التميز"),
         "homePage": MessageLookupByLibrary.simpleMessage("الصفحة الرئيسية"),
@@ -51,11 +53,19 @@ class MessageLookup extends MessageLookupByLibrary {
         "name": MessageLookupByLibrary.simpleMessage("الاسم الثلاثي"),
         "nationalID":
             MessageLookupByLibrary.simpleMessage("رقم الهوية الوطنية"),
+        "noInternetConnection": MessageLookupByLibrary.simpleMessage(
+            "لا يوجد اتصال بالانترنت تحقق من تفعيله"),
+        "noNotificationYet":
+            MessageLookupByLibrary.simpleMessage("لا يوجد اشعارات حتي الان"),
+        "notifications": MessageLookupByLibrary.simpleMessage("الاشعارات"),
         "otpCodeSent": MessageLookupByLibrary.simpleMessage(
             "Verification code sent see messages"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone number"),
         "requiredField":
             MessageLookupByLibrary.simpleMessage("هذا الحقل مطلوب"),
+        "resendOTP": MessageLookupByLibrary.simpleMessage("أعد الارسال"),
+        "resendOTPAfter":
+            MessageLookupByLibrary.simpleMessage("أعد الارسال خلال"),
         "save": MessageLookupByLibrary.simpleMessage("Save"),
         "sendValidateCode":
             MessageLookupByLibrary.simpleMessage("Send validate code"),
@@ -68,6 +78,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "verification": MessageLookupByLibrary.simpleMessage("تحقق"),
         "verificationCode": MessageLookupByLibrary.simpleMessage("رمز التحقق"),
         "welcome": MessageLookupByLibrary.simpleMessage("اهلا"),
+        "welcomeBack": MessageLookupByLibrary.simpleMessage("مرحبا بعودتك"),
         "welcomeClient":
             MessageLookupByLibrary.simpleMessage("اهلا عميل التميز"),
         "yourDoorToGetService": MessageLookupByLibrary.simpleMessage(

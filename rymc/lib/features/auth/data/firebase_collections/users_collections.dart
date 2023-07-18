@@ -7,24 +7,29 @@ class UsersCollection {
   static UsersCollection instance = _init;
 
   final CollectionReference _userCollectionReference =
-      FirebaseFirestore.instance.collection(Collections.Users);
+      FirebaseFirestore.instance.collection(Collections.users);
 
-  Future<void> addUser(UserModel user) async =>
-      await _userCollectionReference.doc(user.uid).set(user.toMap());
+  Future<void> addUser(UserModel user) async => await _userCollectionReference
+      .doc(user.uid)
+      .collection(Collections.usersData)
+      .doc(Collections.usersData)
+      .set(user.toMap());
 
   Future<void> updateUser(UserModel user) async =>
-      await _userCollectionReference.doc(user.phone).update(user.toMap());
+      await _userCollectionReference
+          .doc(user.uid)
+          .collection(Collections.usersData)
+          .doc(Collections.usersData)
+          .update(user.toMap());
 
   Future<UserModel?> getUser({required String uid}) async {
-    final DocumentSnapshot<Object?> data =
-        await _userCollectionReference.doc(uid).get();
-    UserModel? user;
-    user = UserModel(
-      name: data["name"],
-      phone: data["phone:"],
-      nationalId: data["nationalId"],
-      createAt: data["createAt"],
-    );
-    return user;
+    final DocumentSnapshot<Object?> data = await _userCollectionReference
+        .doc(uid)
+        .collection(Collections.usersData)
+        .doc(Collections.usersData)
+        .get();
+    final d = data.data() as Map<String, dynamic>;
+
+    return UserModel.fromMap(d);
   }
 }

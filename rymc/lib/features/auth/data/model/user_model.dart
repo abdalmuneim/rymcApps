@@ -19,8 +19,8 @@ class UserModel extends User {
         phone: json['phone'],
         nationalId: json['nationalId'],
         createAt: json['createAt'],
-        fcm: json['fcm'],
-        uid: json['uid'],
+        // fcm: json['fcm'],
+        // uid: json['uid'],
         member: json["member"] == null
             ? []
             : List<UserModel>.from(

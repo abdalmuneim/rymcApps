@@ -250,6 +250,16 @@ class S {
     );
   }
 
+  /// `تعديل أفراد أسرتك`
+  String get editFamilyFromMember {
+    return Intl.message(
+      'تعديل أفراد أسرتك',
+      name: 'editFamilyFromMember',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `عميل التميز`
   String get greatClint {
     return Intl.message(
@@ -355,6 +365,66 @@ class S {
     return Intl.message(
       'تم انشاء الحساب بنجاح',
       name: 'createdAccountSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `مرحبا بعودتك`
+  String get welcomeBack {
+    return Intl.message(
+      'مرحبا بعودتك',
+      name: 'welcomeBack',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `لا يوجد اتصال بالانترنت تحقق من تفعيله`
+  String get noInternetConnection {
+    return Intl.message(
+      'لا يوجد اتصال بالانترنت تحقق من تفعيله',
+      name: 'noInternetConnection',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `لا يوجد اشعارات حتي الان`
+  String get noNotificationYet {
+    return Intl.message(
+      'لا يوجد اشعارات حتي الان',
+      name: 'noNotificationYet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `الاشعارات`
+  String get notifications {
+    return Intl.message(
+      'الاشعارات',
+      name: 'notifications',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `أعد الارسال`
+  String get resendOTP {
+    return Intl.message(
+      'أعد الارسال',
+      name: 'resendOTP',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `أعد الارسال خلال`
+  String get resendOTPAfter {
+    return Intl.message(
+      'أعد الارسال خلال',
+      name: 'resendOTPAfter',
       desc: '',
       args: [],
     );

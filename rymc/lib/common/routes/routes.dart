@@ -7,7 +7,8 @@ import 'package:rymc/features/auth/presentations/views/register_view.dart';
 import 'package:rymc/features/family_members/presentations/views/add_member_view.dart';
 import 'package:rymc/features/family_members/presentations/views/edit_member_view.dart';
 import 'package:rymc/features/family_members/presentations/views/family_members_view.dart';
-import 'package:rymc/features/home/pressentations/views/home_view.dart';
+import 'package:rymc/features/home/views/home_view.dart';
+import 'package:rymc/features/notification/presentations/views/notification_view.dart';
 import 'package:rymc/features/start/presentations/view/start.dart';
 import 'package:rymc/features/splash/Splash_view.dart';
 part './routes_string.dart';
@@ -101,6 +102,15 @@ class Routes {
               nationalId: nationalId,
             ),
           );
+        },
+      ),
+
+      /// notification
+      GoRoute(
+        name: RoutesStrings.notification,
+        path: RoutesStrings.notification,
+        builder: (BuildContext context, GoRouterState state) {
+          return NotificationView();
         },
       ),
     ],

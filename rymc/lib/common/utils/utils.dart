@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:rymc/common/resources/app_color.dart';
 import 'package:rymc/common/services/navigation_services.dart';
+import 'package:rymc/common/utils/extension.dart';
 import 'package:rymc/common/widgets/custom_text.dart';
 import 'package:sizer/sizer.dart';
 
@@ -29,7 +31,43 @@ class Utils {
       showToast(message, backgroundColor: AppColors.red);
 
   static showLottieDialog(
-      {required String lottie, required String text, List<Widget>? action}) {}
+      {required String lottie, required String text, List<Widget>? action}) {
+    return showDialog(
+      context: _context,
+      barrierDismissible: false,
+      builder: (context) => WillPopScope(
+        onWillPop: () async => false,
+        child: AlertDialog(
+          content: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              LottieBuilder.asset(
+                lottie,
+              ),
+              10.sh,
+              Text(
+                text,
+                textAlign: TextAlign.center,
+                style: Theme.of(_context).textTheme.headlineLarge,
+              ),
+              20.sh,
+              if (action != null) ...[
+                Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: action,
+                  ),
+                ),
+                20.sh,
+              ],
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 
   static void showLoading({String? message}) {}
 

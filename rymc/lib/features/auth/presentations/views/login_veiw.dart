@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rymc/common/app_constant/app_constants.dart';
-import 'package:rymc/common/helper/validator.dart';
 import 'package:rymc/common/resources/app_color.dart';
 import 'package:rymc/common/utils/extension.dart';
 import 'package:rymc/common/widgets/custom_elevated_button.dart';
@@ -20,8 +19,8 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-  late LoginProvider read;
-  late LoginProvider watch;
+  late LogInProvider read = context.read<LogInProvider>();
+  late LogInProvider watch = context.watch<LogInProvider>();
 
   @override
   void initState() {
@@ -34,15 +33,14 @@ class _LoginViewState extends State<LoginView> {
     init();
   }
 
-  init() async {
-    read = context.read<LoginProvider>();
-    watch = context.watch<LoginProvider>();
+  init() {
+    read.init();
   }
 
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: ()async => false,
+      onWillPop: () async => false,
       child: Scaffold(
         body: Center(
           child: Form(
@@ -62,16 +60,52 @@ class _LoginViewState extends State<LoginView> {
                   color: AppColors.title,
                 ),
                 2.h.sh,
-                CustomTextFormField(
-                  maxLength: AppConstants.phoneLength,
-                  counterText: '',
-                  controller: watch.phoneTEXT,
-                  textAlign: TextAlign.center,
+                SizedBox(
                   width: 90.w,
-                  border: false,
-                  isNumberOnly: true,
-                  validator: (value) => AppValidator.validateFields(
-                      value, ValidationType.phone, context),
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Expanded(
+                            flex: 2,
+                            child: CustomTextFormField(
+                              maxLength: AppConstants.phoneLength,
+                              counterText: '',
+                              borderRadius: BorderRadius.only(
+                                  topRight: Radius.circular(20),
+                                  bottomRight: Radius.circular(20)),
+                              controller: watch.phoneTEXT,
+                              textAlign: TextAlign.left,
+                              border: false,
+                              isNumberOnly: true,
+                            ),
+                          ),
+                          Expanded(
+                            child: CustomTextFormField(
+                              controller: watch.countryCodeTEXT,
+                              textAlign: TextAlign.right,
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(20),
+                                  bottomLeft: Radius.circular(20)),
+                              border: false,
+                              enabled: false,
+                              fillColor: AppColors.lightBlue,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Visibility(
+                        visible: watch.validPhone,
+                        child: Text(
+                          S.of(context).validPhone,
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyLarge!
+                              .copyWith(color: AppColors.red),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
                 10.h.sh,
                 watch.isLoading

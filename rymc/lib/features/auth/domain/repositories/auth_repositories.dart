@@ -9,6 +9,7 @@ abstract class IAuthRepository {
   Future<Either<Failure, bool>> signIn({
     required String phone,
   });
+  Future<Either<Failure, String>> resendOTP();
 
   Future<Either<Failure, bool>> register({
     required String name,

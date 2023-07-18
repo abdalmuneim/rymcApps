@@ -43,7 +43,6 @@ class _RegisterViewState extends State<RegisterView> {
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
-        resizeToAvoidBottomInset: false,
         body: Center(
           child: Form(
             key: watch.globalKey,

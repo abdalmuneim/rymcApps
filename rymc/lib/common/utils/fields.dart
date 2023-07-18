@@ -2,7 +2,7 @@ class Fields {
   static String get getLang => "lang";
   static String get invalidPhoneNumber => 'invalid-phone-number';
 
-  static String get fcmToken => "fcmToken";
+  static String get notification => "notification";
 }
 
 class StoredKeys {
@@ -13,5 +13,8 @@ class StoredKeys {
 }
 
 class Collections {
-  static String get Users => "Users";
+  static String get users => "Users";
+  static String get usersData => "UserData";
+  static String get userMembers => "UserMembers";
+  static String get notifications => "notifications";
 }

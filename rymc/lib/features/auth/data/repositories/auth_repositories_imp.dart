@@ -42,6 +42,7 @@ class AuthRepository implements IAuthRepository {
   @override
   Future<Either<Failure, Unit>> logOut() async {
     try {
+      await remoteDataSource.logOut();
       await localDataSource.removeToken();
       await localDataSource.removeUser();
       await localDataSource.readPhone();
@@ -69,10 +70,9 @@ class AuthRepository implements IAuthRepository {
         fcm: fcm,
         phone: phone,
         uid: uid,
-        createAt: DateFormat('yyyy-MM-dd hh:mm').format(
+        createAt: DateFormat('hh:mm dd-MM-yyyy').format(
           DateTime.now(),
         ),
-        member: [],
       );
       await remoteDataSource.register(user: user);
       await localDataSource.writeUser(user: user);
@@ -91,7 +91,7 @@ class AuthRepository implements IAuthRepository {
   @override
   Future<Either<Failure, bool>> signIn({required String phone}) async {
     try {
-      await remoteDataSource.signIn(phone: phone);
+      // await remoteDataSource.signIn(phone: phone);
       await localDataSource.writerPhone(phone: phone);
       return Right(true);
     } on DataBaseException {
@@ -104,8 +104,8 @@ class AuthRepository implements IAuthRepository {
   @override
   Future<Either<Failure, bool>> verifyCode({required String sms}) async {
     try {
-      final uid = await remoteDataSource.verifyCode(sms: sms);
-      await localDataSource.writeToken(token: uid);
+      // final uid = await remoteDataSource.verifyCode(sms: sms);
+      await localDataSource.writeToken(token: sms);
       return Right(true);
     } on DataBaseException {
       return const Left(DatabaseFailure());
@@ -129,6 +129,19 @@ class AuthRepository implements IAuthRepository {
       return const Left(DatabaseFailure());
     } catch (error) {
       return Left(ExceptionFailure(message: error.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, String>> resendOTP() async {
+    try {
+      // await remoteDataSource.signIn(phone: phone);
+      final String phone = await localDataSource.readPhone();
+      return Right(phone);
+    } on DataBaseException {
+      return const Left(DatabaseFailure());
+    } catch (e) {
+      return Left(ExceptionFailure(message: e.toString()));
     }
   }
 }

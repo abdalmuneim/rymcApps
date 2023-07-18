@@ -1,13 +1,16 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:http/http.dart' as http;
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:intl/intl.dart';
 import 'package:rymc/common/app_constant/api_keys.dart';
 import 'package:rymc/common/routes/routes.dart';
 import 'package:rymc/common/services/navigation_services.dart';
 import 'package:rymc/common/utils/fields.dart';
+import 'package:rymc/features/notification/domain/use_cases/add_notification_use_case.dart';
 
 abstract class IFCMNotificationFirebase {
   requestPermission();
@@ -24,8 +27,8 @@ abstract class IFCMNotificationFirebase {
 class FCMNotificationFirebase implements IFCMNotificationFirebase {
   FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
   final context = NavigationService.context;
-
-  FCMNotificationFirebase() {
+  AddNotificationUseCase _addNotificationUseCase;
+  FCMNotificationFirebase(this._addNotificationUseCase) {
     requestPermission();
     initInfo();
   }
@@ -43,12 +46,12 @@ class FCMNotificationFirebase implements IFCMNotificationFirebase {
     );
 
     if (settings.authorizationStatus == AuthorizationStatus.authorized) {
-      print("User granted permission");
+      log("User granted permission");
     } else if (settings.authorizationStatus ==
         AuthorizationStatus.provisional) {
-      print("User granted provisional permission");
+      log("User granted provisional permission");
     } else {
-      print("User declined or has not accepted permission");
+      log("User declined or has not accepted permission");
     }
   }
 
@@ -76,14 +79,17 @@ class FCMNotificationFirebase implements IFCMNotificationFirebase {
     _flutterLocalNotificationsPlugin.initialize(
       initializationSettings,
       onDidReceiveNotificationResponse: (NotificationResponse details) async {
+        log("=========> ${details.payload}");
+        await _addNotificationUseCase(
+          title: "details.notification?.title",
+          description: "details.notification?.body",
+          // data: details.data,
+          getAt: DateFormat('hh:mm dd-MM-yyyy').format(DateTime.now()),
+        );
         try {
-          if (details.payload != null) {
-            print(details.payload!);
+          print(details.payload!);
 
-            context.pushNamed(RoutesStrings.splash);
-          } else {
-            context.pushNamed(RoutesStrings.splash);
-          }
+          context.pushNamed(RoutesStrings.splash);
         } catch (e) {
           print(e);
         }
@@ -93,21 +99,26 @@ class FCMNotificationFirebase implements IFCMNotificationFirebase {
 
     /// firebase massaging
     FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
-      print("---------------on Messaging------------");
-      print(
-          "OnMessaging: ${message.notification!.title} \n${message.notification?.body}");
+      log("---------------on Messaging------------");
+      log("OnMessaging: ${message.notification!.title} \n${message.notification?.body}");
+      await _addNotificationUseCase(
+        title: message.notification?.title ?? "",
+        description: message.notification?.body ?? "",
+        // data: message.data,
+        getAt: DateFormat('hh:mm dd-MM-yyyy')
+            .format(message.sentTime ?? DateTime.now()),
+      );
       BigTextStyleInformation bigTextStyleInformation = BigTextStyleInformation(
         message.notification!.body.toString(),
         htmlFormatBigText: true,
       );
       AndroidNotificationDetails androidNotificationDetails =
           AndroidNotificationDetails(
-        Fields.fcmToken,
-        Fields.fcmToken,
+        Fields.notification,
+        Fields.notification,
         styleInformation: bigTextStyleInformation,
         priority: Priority.high,
         playSound: true,
-        sound: RawResourceAndroidNotificationSound('callcoming'),
         fullScreenIntent: true,
         enableLights: true,
         audioAttributesUsage: AudioAttributesUsage.voiceCommunication,
@@ -153,8 +164,8 @@ class FCMNotificationFirebase implements IFCMNotificationFirebase {
             'notification': <String, dynamic>{
               'title:': title,
               'body': body,
-              'android_channel_id': Fields.fcmToken,
-              'ios_channel_id': Fields.fcmToken,
+              'android_channel_id': Fields.notification,
+              'ios_channel_id': Fields.notification,
             },
             'to': fcmToken,
           },

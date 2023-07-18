@@ -1,38 +1,40 @@
 abstract class Failure {
   final String message;
-  const Failure(this.message);
-
-  @override
-  bool operator ==(covariant Failure other) {
-    if (identical(this, other)) return true;
-
-    return other.message == message;
-  }
-
-  @override
-  int get hashCode => message.hashCode;
+  const Failure({required this.message});
 }
 
 class ServerFailure extends Failure {
-  const ServerFailure({String message = ''}) : super(message);
-}
-
-class UnVerifiedFailure extends Failure {
-  const UnVerifiedFailure({String phoneNumber = ''}) : super(phoneNumber);
+  const ServerFailure({
+    super.message = 'خطاء في السرفر',
+  });
+  List<Object?> get props => [];
 }
 
 class ConnectionFailure extends Failure {
-  const ConnectionFailure({String message = ''}) : super(message);
+  const ConnectionFailure({super.message = 'خطاء في الاتصال'});
+  List<Object?> get props => [];
 }
 
 class UnAuthorizedFailure extends Failure {
-  const UnAuthorizedFailure({String message = ''}) : super(message);
+  const UnAuthorizedFailure({
+    super.message = "حسابك غير مسجل حاول تسجيل الدخول مرة اخرى.",
+  });
+
+  List<Object?> get props => [];
 }
 
 class DatabaseFailure extends Failure {
-  const DatabaseFailure({String message = ''}) : super(message);
+  const DatabaseFailure({
+    super.message = 'تعذر العثور علي البيانات',
+  });
+
+  List<Object?> get props => [];
 }
 
 class ExceptionFailure extends Failure {
-  const ExceptionFailure({String message = ''}) : super(message);
+  const ExceptionFailure({
+    super.message = '',
+  });
+
+  List<Object?> get props => [];
 }

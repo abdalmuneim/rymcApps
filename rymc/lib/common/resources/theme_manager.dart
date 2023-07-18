@@ -5,6 +5,7 @@ import 'package:sizer/sizer.dart';
 
 ThemeData get applicationTheme => ThemeData(
       scaffoldBackgroundColor: AppColors.scaffoldColor,
+      useMaterial3: false,
 
       /// Main Color
       primaryColor: AppColors.primary,
@@ -13,9 +14,15 @@ ThemeData get applicationTheme => ThemeData(
       disabledColor: Colors.grey,
 
       ///list tile
-      listTileTheme: const ListTileThemeData(
+      listTileTheme: ListTileThemeData(
         iconColor: AppColors.black,
         visualDensity: VisualDensity.comfortable,
+        titleTextStyle: GoogleFonts.tajawal(
+          color: AppColors.title,
+        ),
+        subtitleTextStyle: GoogleFonts.tajawal(
+          color: AppColors.subTitle,
+        ),
       ),
 
       /// CardViewTheme
@@ -60,6 +67,7 @@ ThemeData get applicationTheme => ThemeData(
           ),
           textStyle: GoogleFonts.tajawal(
             fontSize: 14.sp,
+            color: AppColors.white,
             fontWeight: FontWeight.bold,
           ),
           backgroundColor: AppColors.primary,

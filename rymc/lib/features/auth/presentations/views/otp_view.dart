@@ -20,23 +20,17 @@ class OtpView extends StatefulWidget {
 }
 
 class _OtpViewState extends State<OtpView> {
-  late OtpProvider read;
-  late OtpProvider watch;
+  late OtpProvider read = context.read<OtpProvider>();
+  late OtpProvider watch = context.watch<OtpProvider>();
 
   @override
   void initState() {
     super.initState();
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
     init();
   }
 
   init() {
-    read = context.read<OtpProvider>();
-    watch = context.watch<OtpProvider>();
+    read.init();
   }
 
   @override
@@ -70,6 +64,27 @@ class _OtpViewState extends State<OtpView> {
                 isNumberOnly: true,
                 validator: (value) => AppValidator.validateFields(
                     value, ValidationType.validationCode, context),
+              ),
+              3.h.sh,
+              TextButton(
+                onPressed:
+                    watch.timerDuration.inSeconds != 0 ? null : read.resendOTP,
+                child: watch.isLoadingResent
+                    ? CircularProgressIndicator()
+                    : Selector<OtpProvider, Duration>(
+                        selector: (_, OtpProvider provider) =>
+                            provider.timerDuration,
+                        builder: (_, Duration duration, __) {
+                          final int seconds = duration.inSeconds;
+                          return TextButton(
+                            onPressed: seconds != 0 ? null : read.resendOTP(),
+                            child: CustomText(
+                              text: (seconds == 0
+                                  ? S.of(context).resendOTP
+                                  : '${S.of(context).resendOTPAfter}: ${'${duration.inMinutes.getDurationReminder}:${seconds.remainder(60).getDurationReminder}'}'),
+                            ),
+                          );
+                        }),
               ),
               10.h.sh,
               watch.isLoading

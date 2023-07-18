@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rymc/common/routes/routes.dart';
@@ -24,12 +22,12 @@ class RegisterProvider extends ChangeNotifier {
 
   Future<String> getFCM() async {
     final fcm = await _fcmNotificationFirebase.getFCMToken() ?? "";
-    log(fcm);
     return fcm;
   }
 
   register() async {
     if (_globalKey.currentState!.validate()) {
+      FocusManager.instance.primaryFocus?.unfocus();
       _isLoading = true;
       notifyListeners();
       final result = await _registerUseCase(
@@ -39,11 +37,17 @@ class RegisterProvider extends ChangeNotifier {
       _isLoading = false;
       notifyListeners();
       result.fold((l) => Utils.showError(l.message), (r) {
-        context.pushNamed(RoutesStrings.home);
+        context.pushReplacementNamed(RoutesStrings.home);
+        clear();
         Utils.showSuccess(S.of(context).createdAccountSuccess);
       });
     } else {
       Utils.showError(S.of(context).checkAllFields);
     }
+  }
+
+  void clear() {
+    nameTEXT.clear();
+    nationalIdTEXT.clear();
   }
 }

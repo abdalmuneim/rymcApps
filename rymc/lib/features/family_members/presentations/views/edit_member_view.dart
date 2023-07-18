@@ -51,7 +51,7 @@ class _EditMemberViewState extends State<EditMemberView> {
                 SizedBox(
                   width: 100.w,
                   child: CustomText(
-                    text: S.of(context).addFamilyFromMember,
+                    text: S.of(context).editFamilyFromMember,
                     fontWeight: FontWeight.bold,
                     textAlign: TextAlign.start,
                   ),
@@ -79,6 +79,7 @@ class _EditMemberViewState extends State<EditMemberView> {
                 ),
                 2.h.sh,
                 CustomTextFormField(
+                  enabled: false,
                   controller: watch.nationalIdTEXT,
                   textAlign: TextAlign.center,
                   width: 90.w,

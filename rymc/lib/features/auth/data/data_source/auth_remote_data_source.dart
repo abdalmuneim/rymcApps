@@ -1,27 +1,27 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
-import 'package:rymc/common/app_constant/app_constants.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:rymc/common/services/server_service.dart';
 import 'package:rymc/common/utils/fields.dart';
-import 'package:rymc/common/utils/utils.dart';
 import 'package:rymc/features/auth/data/firebase_collections/users_collections.dart';
 import 'package:rymc/features/auth/data/model/user_model.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class IAuthRemoteDataSource {
-  Future<void> signIn({
+  /*  Future<void> signIn({
     required String phone,
   });
+    Future<String> verifyCode({
+    required String sms,
+  });
+   */
 
   Future<void> register({
     required UserModel user,
   });
-  Future<String> verifyCode({
-    required String sms,
-  });
+  Future<void> logOut();
+
   Future<UserModel?> isSignInBefore({
     required String uid,
   });
@@ -30,14 +30,14 @@ abstract class IAuthRemoteDataSource {
 }
 
 class AuthRemoteDataSource implements IAuthRemoteDataSource {
-  FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+/*   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   AuthRemoteDataSource();
 
   /// come from firebase
   static String _verificationId = '';
 
   /// come from firebase
-  static int? _forceResendingToken;
+  static int? _forceResendingToken; */
 
   @override
   Future<Unit> removeAccount() async {
@@ -59,12 +59,13 @@ class AuthRemoteDataSource implements IAuthRemoteDataSource {
     }
   }
 
-  @override
+/*   @override
   Future<void> signIn({required String phone}) async {
     try {
+      log(phone);
       await firebaseAuth.verifyPhoneNumber(
         phoneNumber: phone,
-        // forceResendingToken: _forceResendingToken,
+        forceResendingToken: _forceResendingToken,
         codeSent: (String verificationId, int? forceResendingToken) {
           log(" ---> Sent");
 
@@ -112,13 +113,16 @@ class AuthRemoteDataSource implements IAuthRemoteDataSource {
       rethrow;
     }
   }
+ */
 
   @override
   Future<UserModel?> isSignInBefore({required String uid}) async {
     try {
       //Check if already Sign Up
       final QuerySnapshot resultQuery = await FirebaseFirestore.instance
-          .collection(Collections.Users)
+          .collection(Collections.users)
+          .doc(uid)
+          .collection(Collections.usersData)
           .where("uid", isEqualTo: uid)
           .get();
 
@@ -138,4 +142,20 @@ class AuthRemoteDataSource implements IAuthRemoteDataSource {
       rethrow;
     }
   }
+
+  @override
+  Future<void> logOut() async {
+    try {
+      await FirebaseAuth.instance.signOut();
+    } on SocketException {
+      return ServerService<void>().timeOutMethod(
+        () => logOut(),
+      );
+    } catch (e) {
+      print(e);
+      rethrow;
+    }
+  }
+
+  
 }
