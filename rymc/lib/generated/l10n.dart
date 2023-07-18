@@ -389,6 +389,16 @@ class S {
       args: [],
     );
   }
+
+  /// `لا يوجد اشعارات حتي الان`
+  String get noNotificationYet {
+    return Intl.message(
+      'لا يوجد اشعارات حتي الان',
+      name: 'noNotificationYet',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

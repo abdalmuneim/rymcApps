@@ -6,8 +6,6 @@ import 'package:rymc/features/notification/domain/repositories/notification_repo
 class GetNotificationUseCase {
   INotificationRepository iNotificationRepository;
   GetNotificationUseCase(this.iNotificationRepository);
-  Future<Either<Failure, List<Notification>>> call({
-    required String uid,
-  }) async =>
-      await iNotificationRepository.getNotifications(uid: uid);
+  Future<Either<Failure, List<Notification>>> call() async =>
+      await iNotificationRepository.getNotifications();
 }

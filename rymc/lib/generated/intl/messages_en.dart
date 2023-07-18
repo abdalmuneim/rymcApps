@@ -55,6 +55,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("رقم الهوية الوطنية"),
         "noInternetConnection": MessageLookupByLibrary.simpleMessage(
             "لا يوجد اتصال بالانترنت تحقق من تفعيله"),
+        "noNotificationYet":
+            MessageLookupByLibrary.simpleMessage("لا يوجد اشعارات حتي الان"),
         "otpCodeSent": MessageLookupByLibrary.simpleMessage(
             "Verification code sent see messages"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone number"),

@@ -9,15 +9,14 @@ import 'package:rymc/features/notification/domain/repositories/notification_repo
 
 class NotificationRepository implements INotificationRepository {
   INotificationRemoteDataSource iNotificationRemoteDataSource;
-  AuthLocalDataSource localDataSource;
+  IAuthLocalDataSource localDataSource;
   NotificationRepository({
     required this.iNotificationRemoteDataSource,
     required this.localDataSource,
   });
 
   @override
-  Future<Either<Failure, List<NotificationModel>>> getNotifications(
-      {required String uid}) async {
+  Future<Either<Failure, List<NotificationModel>>> getNotifications() async {
     try {
       final String? uid = await localDataSource.readToken();
       if (uid != null) {
@@ -36,25 +35,30 @@ class NotificationRepository implements INotificationRepository {
   }
 
   @override
-  Future<Either<Failure, Unit>> addNotification(
-      {required int id,
-      required String title,
-      required String description,
-      required String image,
-      required String data,
-      required String getAt}) async {
+  Future<Either<Failure, Unit>> addNotification({
+    required String title,
+    required String description,
+    String? image,
+    // required Map<dynamic, dynamic> data,
+    required String getAt,
+  }) async {
     try {
       final String? uid = await localDataSource.readToken();
       if (uid != null) {
-        await iNotificationRemoteDataSource.addNotification(
-          id: id,
-          title: title,
-          description: description,
-          image: image,
-          data: data,
-          getAt: DateFormat('hh:mm dd-MM-yyyy').format(DateTime.now()),
-          uid: uid,
-        );
+        await iNotificationRemoteDataSource
+            .getNotifications(uid: uid)
+            .then((List<NotificationModel> value) async {
+          await iNotificationRemoteDataSource.addNotification(
+            id: value.length + 1,
+            title: title,
+            description: description,
+            image: image,
+            // data: data,
+            getAt: DateFormat('hh:mm dd-MM-yyyy').format(DateTime.now()),
+            uid: uid,
+          );
+        });
+
         return Right(unit);
       }
       return Left(UnAuthorizedFailure());

@@ -10,8 +10,8 @@ abstract class INotificationRemoteDataSource {
     required int id,
     required String title,
     required String description,
-    required String image,
-    required String data,
+    String? image,
+    // required Map<dynamic, dynamic> data,
     required String getAt,
     required String uid,
   });
@@ -24,8 +24,8 @@ class NotificationRemoteDataSource implements INotificationRemoteDataSource {
       {required int id,
       required String title,
       required String description,
-      required String image,
-      required String data,
+      String? image,
+      // required Map<dynamic, dynamic> data,
       required String uid,
       required String getAt}) async {
     try {
@@ -34,7 +34,7 @@ class NotificationRemoteDataSource implements INotificationRemoteDataSource {
           title: title,
           description: description,
           image: image,
-          data: data,
+          // data: data,
           getAt: getAt);
       return await NotificationCollection.instance
           .addNotification(uid: uid, notification: user);
@@ -45,7 +45,7 @@ class NotificationRemoteDataSource implements INotificationRemoteDataSource {
           title: title,
           description: description,
           image: image,
-          data: data,
+          // data: data,
           getAt: getAt,
           uid: uid,
         ),

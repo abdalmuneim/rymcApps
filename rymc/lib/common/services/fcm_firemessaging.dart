@@ -5,10 +5,12 @@ import 'package:go_router/go_router.dart';
 import 'package:http/http.dart' as http;
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:intl/intl.dart';
 import 'package:rymc/common/app_constant/api_keys.dart';
 import 'package:rymc/common/routes/routes.dart';
 import 'package:rymc/common/services/navigation_services.dart';
 import 'package:rymc/common/utils/fields.dart';
+import 'package:rymc/features/notification/domain/use_cases/add_notification_use_case.dart';
 
 abstract class IFCMNotificationFirebase {
   requestPermission();
@@ -25,8 +27,8 @@ abstract class IFCMNotificationFirebase {
 class FCMNotificationFirebase implements IFCMNotificationFirebase {
   FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
   final context = NavigationService.context;
-
-  FCMNotificationFirebase() {
+  AddNotificationUseCase _addNotificationUseCase;
+  FCMNotificationFirebase(this._addNotificationUseCase) {
     requestPermission();
     initInfo();
   }
@@ -78,13 +80,8 @@ class FCMNotificationFirebase implements IFCMNotificationFirebase {
       initializationSettings,
       onDidReceiveNotificationResponse: (NotificationResponse details) async {
         try {
-          if (details.payload != null) {
-            print(details.payload!);
-
-            context.pushNamed(RoutesStrings.splash);
-          } else {
-            context.pushNamed(RoutesStrings.splash);
-          }
+          print(details.payload!);
+          context.pushNamed(RoutesStrings.splash);
         } catch (e) {
           print(e);
         }
@@ -94,9 +91,13 @@ class FCMNotificationFirebase implements IFCMNotificationFirebase {
 
     /// firebase massaging
     FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
-      print("---------------on Messaging------------");
-      print(
-          "OnMessaging: ${message.notification!.title} \n${message.notification?.body}");
+      _addNotificationUseCase(
+        title: message.notification?.title ?? "",
+        description: message.notification?.body ?? "",
+        // data: message.data,
+        getAt: DateFormat('hh:mm dd-MM-yyyy')
+            .format(message.sentTime ?? DateTime.now()),
+      );
       BigTextStyleInformation bigTextStyleInformation = BigTextStyleInformation(
         message.notification!.body.toString(),
         htmlFormatBigText: true,

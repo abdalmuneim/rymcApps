@@ -37,5 +37,6 @@
   "otpCodeSent": "تم ارسال رمز التحقق انظر الرسائل",
   "createdAccountSuccess": "تم انشاء الحساب بنجاح",
   "welcomeBack": "مرحبا بعودتك",
-  "noInternetConnection": "لا يوجد اتصال بالانترنت تحقق من تفعيله"
+  "noInternetConnection": "لا يوجد اتصال بالانترنت تحقق من تفعيله",
+  "noNotificationYet": "لا يوجد اشعارات حتي الان"
 }

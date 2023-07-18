@@ -13,9 +13,15 @@ ThemeData get applicationTheme => ThemeData(
       disabledColor: Colors.grey,
 
       ///list tile
-      listTileTheme: const ListTileThemeData(
+      listTileTheme: ListTileThemeData(
         iconColor: AppColors.black,
         visualDensity: VisualDensity.comfortable,
+        titleTextStyle: GoogleFonts.tajawal(
+          color: AppColors.title,
+        ),
+        subtitleTextStyle: GoogleFonts.tajawal(
+          color: AppColors.subTitle,
+        ),
       ),
 
       /// CardViewTheme

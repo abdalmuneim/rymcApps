@@ -42,6 +42,6 @@ class Providers {
     ChangeNotifierProvider(create: (_) => EditMemberProvider(sl())),
 
     /// notification Provider
-    ChangeNotifierProvider(create: (_) => NotificationProvider()),
+    ChangeNotifierProvider(create: (_) => NotificationProvider(sl())),
   ];
 }

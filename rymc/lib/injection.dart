@@ -24,6 +24,7 @@ import 'package:rymc/features/family_members/domain/use_cases/get_members_use_ca
 import 'package:rymc/features/notification/data/data_source/remote_data_source/notification_remote_data_source.dart';
 import 'package:rymc/features/notification/data/repositories/notification_repository_impl.dart';
 import 'package:rymc/features/notification/domain/repositories/notification_repository.dart';
+import 'package:rymc/features/notification/domain/use_cases/add_notification_use_case.dart';
 import 'package:rymc/features/notification/domain/use_cases/get_notification_use_case.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -38,16 +39,16 @@ Future<void> init() async {
   sl.registerLazySingleton(() => const FlutterSecureStorage());
   sl.registerLazySingleton(() => sharedInstance);
 
+  /// Local sources
+  sl.registerLazySingleton<IAuthLocalDataSource>(() =>
+      AuthLocalDataSource(flutterSecureStorage: sl(), sharedPreferences: sl()));
+
   /// Data sources
   sl.registerLazySingleton<IAuthRemoteDataSource>(() => AuthRemoteDataSource());
   sl.registerLazySingleton<IMembersRemoteDataSource>(
       () => MembersRemoteDataSource());
   sl.registerLazySingleton<INotificationRemoteDataSource>(
       () => NotificationRemoteDataSource());
-
-  /// Local sources
-  sl.registerLazySingleton<IAuthLocalDataSource>(() =>
-      AuthLocalDataSource(flutterSecureStorage: sl(), sharedPreferences: sl()));
 
   /// Use cases
   sl.registerLazySingleton(() => GetCurrentUserUseCase(sl()));
@@ -61,6 +62,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => EditMemberUseCase(sl()));
   sl.registerLazySingleton(() => GetMemberUseCase(sl()));
   sl.registerLazySingleton(() => GetNotificationUseCase(sl()));
+  sl.registerLazySingleton(() => AddNotificationUseCase(sl()));
 
   /// Repository
   sl.registerLazySingleton<IAuthRepository>(
@@ -73,7 +75,7 @@ Future<void> init() async {
 
   //--------------- services--------------
   sl.registerLazySingleton<IFCMNotificationFirebase>(
-      () => FCMNotificationFirebase());
+      () => FCMNotificationFirebase(sl()));
   sl.registerLazySingleton<NetworkInfo>(
       () => NetworkInfoImpl(internetConnectionChecker: sl()));
 }

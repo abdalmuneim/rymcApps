@@ -5,7 +5,7 @@ class Notification extends Equatable {
   final String? title;
   final String? description;
   final String? image;
-  final String? data;
+  final Map<dynamic, dynamic>? data;
   final String? getAt;
 
   Notification({
