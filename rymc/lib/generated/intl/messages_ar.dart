@@ -57,6 +57,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "لا يوجد اتصال بالانترنت تحقق من تفعيله"),
         "noNotificationYet":
             MessageLookupByLibrary.simpleMessage("لا يوجد اشعارات حتي الان"),
+        "notifications": MessageLookupByLibrary.simpleMessage("الاشعارات"),
         "otpCodeSent": MessageLookupByLibrary.simpleMessage(
             "تم ارسال رمز التحقق انظر الرسائل"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("رقم الجوال"),

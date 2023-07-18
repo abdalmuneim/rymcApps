@@ -38,5 +38,6 @@
   "createdAccountSuccess": "تم انشاء الحساب بنجاح",
   "welcomeBack": "مرحبا بعودتك",
   "noInternetConnection": "لا يوجد اتصال بالانترنت تحقق من تفعيله",
-  "noNotificationYet": "لا يوجد اشعارات حتي الان"
+  "noNotificationYet": "لا يوجد اشعارات حتي الان",
+  "notifications": "الاشعارات"
 }

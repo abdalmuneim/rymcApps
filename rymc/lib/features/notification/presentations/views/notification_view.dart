@@ -30,7 +30,7 @@ class _NotificationViewState extends State<NotificationView> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(70.0),
         child: AppBar(
-          title: const Text('الاشعارات'),
+          title: Text(S.of(context).notifications),
         ),
       ),
       body: watch.notifications.isEmpty
@@ -52,6 +52,7 @@ class _NotificationViewState extends State<NotificationView> {
               ],
             ))
           : ListView.builder(
+              padding: EdgeInsets.symmetric(horizontal: 3.w),
               itemCount: 10,
               itemBuilder: (context, index) {
                 final notification = watch.notifications[index];

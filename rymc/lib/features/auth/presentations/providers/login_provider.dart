@@ -35,32 +35,26 @@ class LogInProvider extends ChangeNotifier {
 
   final phoneTEXT = TextEditingController();
   final countryCodeTEXT = TextEditingController(text: AppConstants.countryCode);
+  bool _validPhone = false;
+  bool get validPhone => _validPhone;
 
   bool _isLoading = false;
   bool get isLoading => _isLoading;
 
-  /*  sendValidateCode() async {
-    if (_globalKey.currentState!.validate()) {
-      _isLoading = true;
-      notifyListeners();
-      final result = await _signInUseCase(
-          phone: "${AppConstants.countryCode}${phoneTEXT.text.trim()}");
-      _isLoading = false;
-      notifyListeners();
-      result.fold((l) {
-        Utils.showError(l.message);
-      }, (r) {
-        Utils.showSuccess(S.of(context).otpCodeSent);
-      });
-    } else {
-      Utils.showError(S.of(context).phoneNumber);
-    }
-  } */
-  init() async {
-    await _listenToNetWork();
+  init() {
+    _listenToNetWork();
   }
 
   sendValidateCode() async {
+    log("${countryCodeTEXT.text}${phoneTEXT.text.trim()}");
+    _validPhone = false;
+    notifyListeners();
+    if (phoneTEXT.text.isEmpty ||
+        phoneTEXT.text.length != AppConstants.phoneLength) {
+      _validPhone = true;
+      notifyListeners();
+      return;
+    }
     if (_globalKey.currentState!.validate()) {
       FocusManager.instance.primaryFocus?.unfocus();
       _isLoading = true;

@@ -399,6 +399,16 @@ class S {
       args: [],
     );
   }
+
+  /// `الاشعارات`
+  String get notifications {
+    return Intl.message(
+      'الاشعارات',
+      name: 'notifications',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
