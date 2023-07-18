@@ -42,6 +42,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "createdAccountSuccess":
             MessageLookupByLibrary.simpleMessage("تم انشاء الحساب بنجاح"),
         "delete": MessageLookupByLibrary.simpleMessage("Delete"),
+        "editFamilyFromMember":
+            MessageLookupByLibrary.simpleMessage("تعديل أفراد أسرتك"),
         "familyMembers": MessageLookupByLibrary.simpleMessage("أفراد العائلة"),
         "greatClint": MessageLookupByLibrary.simpleMessage("عميل التميز"),
         "homePage": MessageLookupByLibrary.simpleMessage("الصفحة الرئيسية"),
@@ -51,6 +53,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "name": MessageLookupByLibrary.simpleMessage("الاسم الثلاثي"),
         "nationalID":
             MessageLookupByLibrary.simpleMessage("رقم الهوية الوطنية"),
+        "noInternetConnection": MessageLookupByLibrary.simpleMessage(
+            "لا يوجد اتصال بالانترنت تحقق من تفعيله"),
         "otpCodeSent": MessageLookupByLibrary.simpleMessage(
             "Verification code sent see messages"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone number"),

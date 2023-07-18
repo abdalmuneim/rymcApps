@@ -7,26 +7,26 @@ class UsersCollection {
   static UsersCollection instance = _init;
 
   final CollectionReference _userCollectionReference =
-      FirebaseFirestore.instance.collection(Collections.Users);
+      FirebaseFirestore.instance.collection(Collections.users);
 
   Future<void> addUser(UserModel user) async => await _userCollectionReference
       .doc(user.uid)
-      .collection(Collections.UsersData)
-      .doc(Collections.UsersData)
+      .collection(Collections.usersData)
+      .doc(Collections.usersData)
       .set(user.toMap());
 
   Future<void> updateUser(UserModel user) async =>
       await _userCollectionReference
-          .doc(Collections.Users)
-          .collection(Collections.UsersData)
-          .doc(Collections.UsersData)
+          .doc(user.uid)
+          .collection(Collections.usersData)
+          .doc(Collections.usersData)
           .update(user.toMap());
 
   Future<UserModel?> getUser({required String uid}) async {
     final DocumentSnapshot<Object?> data = await _userCollectionReference
         .doc(uid)
-        .collection(Collections.UsersData)
-        .doc(Collections.UsersData)
+        .collection(Collections.usersData)
+        .doc(Collections.usersData)
         .get();
     final d = data.data() as Map<String, dynamic>;
 

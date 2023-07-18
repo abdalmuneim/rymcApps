@@ -250,6 +250,16 @@ class S {
     );
   }
 
+  /// `تعديل أفراد أسرتك`
+  String get editFamilyFromMember {
+    return Intl.message(
+      'تعديل أفراد أسرتك',
+      name: 'editFamilyFromMember',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `عميل التميز`
   String get greatClint {
     return Intl.message(
@@ -365,6 +375,16 @@ class S {
     return Intl.message(
       'مرحبا بعودتك',
       name: 'welcomeBack',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `لا يوجد اتصال بالانترنت تحقق من تفعيله`
+  String get noInternetConnection {
+    return Intl.message(
+      'لا يوجد اتصال بالانترنت تحقق من تفعيله',
+      name: 'noInternetConnection',
       desc: '',
       args: [],
     );

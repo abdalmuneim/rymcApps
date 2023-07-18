@@ -7,9 +7,3 @@ class ServerException implements Exception {
 class UnAuthorizedException implements Exception {}
 
 class DataBaseException implements Exception {}
-
-class UnVerifiedException implements Exception {
-  final String phoneNumber;
-
-  UnVerifiedException({required this.phoneNumber});
-}

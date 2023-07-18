@@ -13,6 +13,8 @@ class StoredKeys {
 }
 
 class Collections {
-  static String get Users => "Users";
-  static String get UsersData => "UsersData";
+  static String get users => "Users";
+  static String get usersData => "UserData";
+  static String get userMembers => "UserMembers";
+  static String get notifications => "notifications";
 }

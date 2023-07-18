@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -121,9 +120,9 @@ class AuthRemoteDataSource implements IAuthRemoteDataSource {
     try {
       //Check if already Sign Up
       final QuerySnapshot resultQuery = await FirebaseFirestore.instance
-          .collection(Collections.Users)
+          .collection(Collections.users)
           .doc(uid)
-          .collection(Collections.UsersData)
+          .collection(Collections.usersData)
           .where("uid", isEqualTo: uid)
           .get();
 

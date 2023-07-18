@@ -15,7 +15,7 @@ class AppConstants {
   static int timeOut = 60;
   static String countryCode = "+20";
 
-  static int phoneLength = 11;
+  static int phoneLength = 10;
   static int codeLength = 6;
 }
 

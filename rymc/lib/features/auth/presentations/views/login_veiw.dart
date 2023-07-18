@@ -20,8 +20,8 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-  late LogInProvider read;
-  late LogInProvider watch;
+  late LogInProvider read = context.read<LogInProvider>();
+  late LogInProvider watch = context.watch<LogInProvider>();
 
   @override
   void initState() {
@@ -35,8 +35,7 @@ class _LoginViewState extends State<LoginView> {
   }
 
   init() async {
-    read = context.read<LogInProvider>();
-    watch = context.watch<LogInProvider>();
+    read.init();
   }
 
   @override
@@ -62,16 +61,40 @@ class _LoginViewState extends State<LoginView> {
                   color: AppColors.title,
                 ),
                 2.h.sh,
-                CustomTextFormField(
-                  maxLength: AppConstants.phoneLength,
-                  counterText: '',
-                  controller: watch.phoneTEXT,
-                  textAlign: TextAlign.center,
+                SizedBox(
                   width: 90.w,
-                  border: false,
-                  isNumberOnly: true,
-                  validator: (value) => AppValidator.validateFields(
-                      value, ValidationType.phone, context),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        flex: 2,
+                        child: CustomTextFormField(
+                          maxLength: AppConstants.phoneLength,
+                          counterText: '',
+                          borderRadius: BorderRadius.only(
+                              topRight: Radius.circular(20),
+                              bottomRight: Radius.circular(20)),
+                          controller: watch.phoneTEXT,
+                          textAlign: TextAlign.left,
+                          border: false,
+                          isNumberOnly: true,
+                          validator: (value) => AppValidator.validateFields(
+                              value, ValidationType.phone, context),
+                        ),
+                      ),
+                      Expanded(
+                        child: CustomTextFormField(
+                          controller: watch.countryCodeTEXT,
+                          textAlign: TextAlign.right,
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(20),
+                              bottomLeft: Radius.circular(20)),
+                          border: false,
+                          enabled: false,
+                          fillColor: AppColors.lightBlue,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
                 10.h.sh,
                 watch.isLoading

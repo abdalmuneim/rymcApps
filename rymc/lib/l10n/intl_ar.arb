@@ -19,6 +19,7 @@
   "welcomeClient": "اهلا عميل التميز",
   "familyMembers": "أفراد العائلة",
   "addFamilyMember": "أضف أفراد أسرتك",
+  "editFamilyFromMember": "تعديل أفراد أسرتك",
   "greatClint": "عميل التميز",
   "addAnotherFamilyMember": "أضف فرد أخر من الأسرة",
   "additionFamilyMember": "إضافة أفراد الأسرة",
@@ -35,5 +36,6 @@
   "addedSuccessfully": "تم الاضافة بنجاح",
   "otpCodeSent": "تم ارسال رمز التحقق انظر الرسائل",
   "createdAccountSuccess": "تم انشاء الحساب بنجاح",
-  "welcomeBack": "مرحبا بعودتك"
+  "welcomeBack": "مرحبا بعودتك",
+  "noInternetConnection": "لا يوجد اتصال بالانترنت تحقق من تفعيله"
 }
