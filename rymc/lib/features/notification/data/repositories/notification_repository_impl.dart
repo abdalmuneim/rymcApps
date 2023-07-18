@@ -1,5 +1,6 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
-import 'package:intl/intl.dart';
 import 'package:rymc/common/handler/exception.dart';
 import 'package:rymc/common/handler/failure.dart';
 import 'package:rymc/features/auth/data/data_source/auth_local_data_source.dart';
@@ -48,13 +49,14 @@ class NotificationRepository implements INotificationRepository {
         await iNotificationRemoteDataSource
             .getNotifications(uid: uid)
             .then((List<NotificationModel> value) async {
+          log("${value.length}");
           await iNotificationRemoteDataSource.addNotification(
             id: value.length + 1,
             title: title,
             description: description,
             image: image,
             // data: data,
-            getAt: DateFormat('hh:mm dd-MM-yyyy').format(DateTime.now()),
+            getAt: DateTime.now().toIso8601String(),
             uid: uid,
           );
         });

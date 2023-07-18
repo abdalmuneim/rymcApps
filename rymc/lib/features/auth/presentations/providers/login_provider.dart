@@ -46,7 +46,6 @@ class LogInProvider extends ChangeNotifier {
   }
 
   sendValidateCode() async {
-    log("${countryCodeTEXT.text}${phoneTEXT.text.trim()}");
     _validPhone = false;
     notifyListeners();
     if (phoneTEXT.text.isEmpty ||
@@ -91,7 +90,7 @@ class LogInProvider extends ChangeNotifier {
             _isLoading = false;
             notifyListeners();
             if (error.code == Fields.invalidPhoneNumber) {
-              Utils.showError('time Out');
+              Utils.showError('Invalid phone number');
             } else {
               Utils.showError(error.message ?? "Error Sent code");
             }
@@ -102,6 +101,8 @@ class LogInProvider extends ChangeNotifier {
           () => sendValidateCode(),
         );
       } catch (e) {
+        _isLoading = false;
+        notifyListeners();
         Utils.showError(e.toString());
       }
     } else {

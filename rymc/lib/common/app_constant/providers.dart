@@ -24,7 +24,8 @@ class Providers {
     ChangeNotifierProvider(create: (_) => LogInProvider(sl(), sl())),
 
     /// OtpProvider
-    ChangeNotifierProvider(create: (_) => OtpProvider(sl(), sl())),
+    ChangeNotifierProvider(
+        create: (_) => OtpProvider(sl(), sl(), sl(), sl(), sl())),
 
     /// RegisterProvider
     ChangeNotifierProvider(create: (_) => RegisterProvider(sl(), sl())),

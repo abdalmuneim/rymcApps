@@ -409,6 +409,26 @@ class S {
       args: [],
     );
   }
+
+  /// `أعد الارسال`
+  String get resendOTP {
+    return Intl.message(
+      'أعد الارسال',
+      name: 'resendOTP',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `أعد الارسال خلال`
+  String get resendOTPAfter {
+    return Intl.message(
+      'أعد الارسال خلال',
+      name: 'resendOTPAfter',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -5,6 +5,7 @@ import 'package:sizer/sizer.dart';
 
 ThemeData get applicationTheme => ThemeData(
       scaffoldBackgroundColor: AppColors.scaffoldColor,
+      useMaterial3: false,
 
       /// Main Color
       primaryColor: AppColors.primary,
@@ -66,6 +67,7 @@ ThemeData get applicationTheme => ThemeData(
           ),
           textStyle: GoogleFonts.tajawal(
             fontSize: 14.sp,
+            color: AppColors.white,
             fontWeight: FontWeight.bold,
           ),
           backgroundColor: AppColors.primary,

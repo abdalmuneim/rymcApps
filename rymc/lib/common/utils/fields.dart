@@ -2,7 +2,7 @@ class Fields {
   static String get getLang => "lang";
   static String get invalidPhoneNumber => 'invalid-phone-number';
 
-  static String get fcmToken => "fcmToken";
+  static String get notification => "notification";
 }
 
 class StoredKeys {

@@ -79,8 +79,16 @@ class FCMNotificationFirebase implements IFCMNotificationFirebase {
     _flutterLocalNotificationsPlugin.initialize(
       initializationSettings,
       onDidReceiveNotificationResponse: (NotificationResponse details) async {
+        log("=========> ${details.payload}");
+        await _addNotificationUseCase(
+          title: "details.notification?.title",
+          description: "details.notification?.body",
+          // data: details.data,
+          getAt: DateFormat('hh:mm dd-MM-yyyy').format(DateTime.now()),
+        );
         try {
           print(details.payload!);
+
           context.pushNamed(RoutesStrings.splash);
         } catch (e) {
           print(e);
@@ -91,7 +99,9 @@ class FCMNotificationFirebase implements IFCMNotificationFirebase {
 
     /// firebase massaging
     FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
-      _addNotificationUseCase(
+      log("---------------on Messaging------------");
+      log("OnMessaging: ${message.notification!.title} \n${message.notification?.body}");
+      await _addNotificationUseCase(
         title: message.notification?.title ?? "",
         description: message.notification?.body ?? "",
         // data: message.data,
@@ -104,12 +114,11 @@ class FCMNotificationFirebase implements IFCMNotificationFirebase {
       );
       AndroidNotificationDetails androidNotificationDetails =
           AndroidNotificationDetails(
-        Fields.fcmToken,
-        Fields.fcmToken,
+        Fields.notification,
+        Fields.notification,
         styleInformation: bigTextStyleInformation,
         priority: Priority.high,
         playSound: true,
-        sound: RawResourceAndroidNotificationSound('callcoming'),
         fullScreenIntent: true,
         enableLights: true,
         audioAttributesUsage: AudioAttributesUsage.voiceCommunication,
@@ -155,8 +164,8 @@ class FCMNotificationFirebase implements IFCMNotificationFirebase {
             'notification': <String, dynamic>{
               'title:': title,
               'body': body,
-              'android_channel_id': Fields.fcmToken,
-              'ios_channel_id': Fields.fcmToken,
+              'android_channel_id': Fields.notification,
+              'ios_channel_id': Fields.notification,
             },
             'to': fcmToken,
           },

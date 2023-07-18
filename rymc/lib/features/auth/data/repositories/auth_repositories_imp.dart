@@ -131,4 +131,17 @@ class AuthRepository implements IAuthRepository {
       return Left(ExceptionFailure(message: error.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, String>> resendOTP() async {
+    try {
+      // await remoteDataSource.signIn(phone: phone);
+      final String phone = await localDataSource.readPhone();
+      return Right(phone);
+    } on DataBaseException {
+      return const Left(DatabaseFailure());
+    } catch (e) {
+      return Left(ExceptionFailure(message: e.toString()));
+    }
+  }
 }

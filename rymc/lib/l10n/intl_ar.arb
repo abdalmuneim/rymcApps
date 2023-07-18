@@ -39,5 +39,7 @@
   "welcomeBack": "مرحبا بعودتك",
   "noInternetConnection": "لا يوجد اتصال بالانترنت تحقق من تفعيله",
   "noNotificationYet": "لا يوجد اشعارات حتي الان",
-  "notifications": "الاشعارات"
+  "notifications": "الاشعارات",
+  "resendOTP": "أعد الارسال",
+  "resendOTPAfter": "أعد الارسال خلال"
 }

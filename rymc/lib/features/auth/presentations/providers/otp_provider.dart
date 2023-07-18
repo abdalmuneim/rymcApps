@@ -2,16 +2,23 @@ import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart' hide User;
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import 'package:rymc/common/app_constant/app_constants.dart';
+import 'package:rymc/common/handler/failure.dart';
 import 'package:rymc/common/routes/routes.dart';
+import 'package:rymc/common/services/fcm_firemessaging.dart';
 import 'package:rymc/common/services/navigation_services.dart';
 import 'package:rymc/common/services/server_service.dart';
+import 'package:rymc/common/utils/fields.dart';
 import 'package:rymc/common/utils/utils.dart';
 import 'package:rymc/features/auth/domain/entities/user.dart';
 import 'package:rymc/features/auth/domain/use_cases/is_sign_in_before_use_case.dart';
+import 'package:rymc/features/auth/domain/use_cases/register_use_case.dart';
+import 'package:rymc/features/auth/domain/use_cases/resend_otp_use_case.dart';
 import 'package:rymc/features/auth/domain/use_cases/verify_code_use_case.dart';
 import 'package:rymc/features/auth/presentations/providers/login_provider.dart';
 import 'package:rymc/generated/l10n.dart';
@@ -19,23 +26,58 @@ import 'package:rymc/generated/l10n.dart';
 class OtpProvider extends ChangeNotifier {
   VerifyCodeUseCase _verifyCodeUseCase;
   IsSignInBeforeUseCase _isSignInBeforeUseCase;
-  OtpProvider(this._verifyCodeUseCase, this._isSignInBeforeUseCase);
+  RegisterUseCase _registerUseCase;
+  ResendOTPUseCase _resendOTPUseCase;
+  IFCMNotificationFirebase _fcmNotificationFirebase;
+
+  OtpProvider(
+      this._verifyCodeUseCase,
+      this._isSignInBeforeUseCase,
+      this._registerUseCase,
+      this._fcmNotificationFirebase,
+      this._resendOTPUseCase);
 
   final GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
   GlobalKey<FormState> get globalKey => _globalKey;
-  final context = NavigationService.context;
+
+  final _context = NavigationService.context;
   final codeTEXT = TextEditingController();
+
   bool _isLoading = false;
   bool get isLoading => _isLoading;
+  bool _isLoadingResend = false;
+  bool get isLoadingResent => _isLoadingResend;
+
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+
+  /// come from firebase
+  String _verificationId = '';
+
+  /// come from firebase
+  int? _forceResendingToken;
 
   /// timer in seconds
   late Duration timerDuration = Duration(seconds: _maximumTimerSeconds);
 
   /// the maximum timer in seconds
-  final int _maximumTimerSeconds = 120;
+  final int _maximumTimerSeconds = AppConstants.timeOut;
 
   /// timer instance
   Timer _timer = Timer(Duration.zero, () {});
+
+  _startTimer() {
+    _timer = Timer.periodic(Duration(seconds: 1), (Timer timer) {
+      if (timer.tick >= _maximumTimerSeconds) {
+        timer.cancel();
+        timerDuration = Duration(seconds: _maximumTimerSeconds);
+        notifyListeners();
+        // context.pop();
+      } else {
+        timerDuration = Duration(seconds: _maximumTimerSeconds - timer.tick);
+        notifyListeners();
+      }
+    });
+  }
 
   verificationCode() async {
     if (_globalKey.currentState!.validate()) {
@@ -45,7 +87,7 @@ class OtpProvider extends ChangeNotifier {
       notifyListeners();
       try {
         final PhoneAuthCredential credential = PhoneAuthProvider.credential(
-            verificationId: Provider.of<LogInProvider>(context, listen: false)
+            verificationId: Provider.of<LogInProvider>(_context, listen: false)
                 .verificationId,
             smsCode: codeTEXT.text);
 
@@ -57,17 +99,28 @@ class OtpProvider extends ChangeNotifier {
           result.fold(
             (l) => Utils.showError(l.message),
             (r) async {
-              final isSigning = await _isSignInBeforeUseCase();
+              final Either<Failure, User?> isSigning =
+                  await _isSignInBeforeUseCase();
               _isLoading = false;
               notifyListeners();
               isSigning.fold(
                 (err) => Utils.showError(err.message),
-                (User? user) {
+                (User? user) async {
                   if (user != null) {
-                    context.pushReplacementNamed(RoutesStrings.home);
-                    Utils.showSuccess(S.of(context).welcomeBack);
+                    final register = await _registerUseCase(
+                      name: user.name!,
+                      nationalId: user.nationalId!,
+                      fcm: await _fcmNotificationFirebase.getFCMToken() ?? "",
+                    );
+                    register.fold(
+                      (l) => Utils.showError(l.message),
+                      (r) {
+                        _context.pushReplacementNamed(RoutesStrings.home);
+                        Utils.showSuccess(S.of(_context).welcomeBack);
+                      },
+                    );
                   } else {
-                    context.pushReplacementNamed(RoutesStrings.register);
+                    _context.pushReplacementNamed(RoutesStrings.register);
                   }
                 },
               );
@@ -80,11 +133,58 @@ class OtpProvider extends ChangeNotifier {
         Utils.showError(e.toString());
       }
     } else {
-      Utils.showError(S.of(context).phoneNumber);
+      Utils.showError(S.of(_context).phoneNumber);
     }
+  }
+
+  resendOTP() async {
+    final result = await _resendOTPUseCase();
+    result.fold(
+      (l) => Utils.showError(l.message),
+      (r) async {
+        try {
+          await _firebaseAuth.verifyPhoneNumber(
+            phoneNumber: r.trim(),
+            forceResendingToken: _forceResendingToken,
+            codeSent: (String verificationId, int? forceResendingToken) async {
+              log(" ---> Sent");
+              _isLoadingResend = false;
+              _startTimer();
+            },
+            codeAutoRetrievalTimeout: (String verificationId) {
+              _verificationId = verificationId;
+            },
+            timeout: Duration(seconds: AppConstants.timeOut),
+            verificationCompleted: (PhoneAuthCredential phoneAuthCredential) {},
+            verificationFailed: (FirebaseAuthException error) {
+              log(" Error---> $error");
+              _isLoadingResend = false;
+              notifyListeners();
+              if (error.code == Fields.invalidPhoneNumber) {
+                Utils.showError('Invalid phone number');
+              } else {
+                Utils.showError(error.message ?? "Error Sent code");
+              }
+            },
+          );
+        } on SocketException {
+          ServerService<void>().timeOutMethod(
+            () => resendOTP(),
+          );
+        } catch (e) {
+          _isLoadingResend = false;
+          notifyListeners();
+          Utils.showError(e.toString());
+        }
+      },
+    );
   }
 
   void clear() {
     codeTEXT.clear();
+  }
+
+  init() {
+    _startTimer();
   }
 }

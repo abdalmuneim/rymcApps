@@ -13,6 +13,7 @@ import 'package:rymc/features/auth/domain/use_cases/is_logged_in_use_case.dart';
 import 'package:rymc/features/auth/domain/use_cases/is_sign_in_before_use_case.dart';
 import 'package:rymc/features/auth/domain/use_cases/log_out_use_case.dart';
 import 'package:rymc/features/auth/domain/use_cases/register_use_case.dart';
+import 'package:rymc/features/auth/domain/use_cases/resend_otp_use_case.dart';
 import 'package:rymc/features/auth/domain/use_cases/sign_in_use_case.dart';
 import 'package:rymc/features/auth/domain/use_cases/verify_code_use_case.dart';
 import 'package:rymc/features/family_members/data/data_source/members_remote_data_source.dart';
@@ -58,6 +59,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => RegisterUseCase(sl()));
   sl.registerLazySingleton(() => SignInUseCase(sl()));
   sl.registerLazySingleton(() => VerifyCodeUseCase(sl()));
+  sl.registerLazySingleton(() => ResendOTPUseCase(sl()));
   sl.registerLazySingleton(() => AddMemberUseCase(sl()));
   sl.registerLazySingleton(() => EditMemberUseCase(sl()));
   sl.registerLazySingleton(() => GetMemberUseCase(sl()));

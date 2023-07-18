@@ -53,7 +53,7 @@ class _NotificationViewState extends State<NotificationView> {
             ))
           : ListView.builder(
               padding: EdgeInsets.symmetric(horizontal: 3.w),
-              itemCount: 10,
+              itemCount: watch.notifications.length,
               itemBuilder: (context, index) {
                 final notification = watch.notifications[index];
                 return Card(

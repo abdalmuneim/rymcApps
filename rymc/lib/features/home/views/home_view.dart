@@ -65,9 +65,9 @@ class _HomeViewState extends State<HomeView> {
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
-                        /* IconButton(
+                        IconButton(
                             onPressed: () => read.logOut(),
-                            icon: Icon(Icons.logout)), */
+                            icon: Icon(Icons.logout)),
                         InkWell(
                             onTap: () {},
                             customBorder: const CircleBorder(),
