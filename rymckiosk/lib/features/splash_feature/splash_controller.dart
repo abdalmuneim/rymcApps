@@ -39,13 +39,6 @@ class SplashController extends GetxController {
     return false;
   }
 
-/*   @override
-  InternalFinalCallback<void> get onDelete {
-    _networkInfo.listenToNetworkStream.cancel();
-    _networkInfo.dispose();
-    return super.onDelete;
-  } */
-
   @override
   void onInit() async {
     Get.put(LocalizationController());
