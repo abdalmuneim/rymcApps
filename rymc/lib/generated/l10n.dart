@@ -429,6 +429,26 @@ class S {
       args: [],
     );
   }
+
+  /// `الهاتف`
+  String get phone {
+    return Intl.message(
+      'الهاتف',
+      name: 'phone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `اضغط مجددا للخروج`
+  String get pressAgainToExit {
+    return Intl.message(
+      'اضغط مجددا للخروج',
+      name: 'pressAgainToExit',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

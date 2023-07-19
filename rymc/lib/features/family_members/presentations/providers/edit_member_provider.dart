@@ -38,14 +38,7 @@ class EditMemberProvider extends ChangeNotifier {
         (l) => Utils.showError(l.message),
         (r) {
           Provider.of<FamilyMembersProvider>(_context, listen: false)
-                  .familyMembers[Provider.of<FamilyMembersProvider>(_context,
-                      listen: false)
-                  .familyMembers
-                  .indexWhere((element) => element.nationalId == nationalId)] =
-              UserModel(
-            name: nameTEXT.text,
-            nationalId: nationalIdTEXT.text,
-          );
+              .getMembers();
           _context.pop(true);
         },
       );

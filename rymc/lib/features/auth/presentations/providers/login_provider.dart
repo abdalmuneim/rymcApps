@@ -30,8 +30,9 @@ class LogInProvider extends ChangeNotifier {
   /// come from firebase
   int? forceResendingToken;
 
-  final GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
-  GlobalKey<FormState> get globalKey => _globalKey;
+  final GlobalKey<FormState> _globalKeySign =
+      GlobalKey<FormState>(debugLabel: "Sign");
+  GlobalKey<FormState> get globalKey => _globalKeySign;
 
   final phoneTEXT = TextEditingController();
   final countryCodeTEXT = TextEditingController(text: AppConstants.countryCode);
@@ -54,7 +55,7 @@ class LogInProvider extends ChangeNotifier {
       notifyListeners();
       return;
     }
-    if (_globalKey.currentState!.validate()) {
+    if (_globalKeySign.currentState!.validate()) {
       FocusManager.instance.primaryFocus?.unfocus();
       _isLoading = true;
       notifyListeners();
@@ -124,5 +125,10 @@ class LogInProvider extends ChangeNotifier {
 
   void clear() {
     phoneTEXT.clear();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 }

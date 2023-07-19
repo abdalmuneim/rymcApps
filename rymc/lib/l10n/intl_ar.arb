@@ -41,5 +41,7 @@
   "noNotificationYet": "لا يوجد اشعارات حتي الان",
   "notifications": "الاشعارات",
   "resendOTP": "أعد الارسال",
-  "resendOTPAfter": "أعد الارسال خلال"
+  "resendOTPAfter": "أعد الارسال خلال",
+  "phone": "الهاتف",
+  "pressAgainToExit": "اضغط مجددا للخروج"
 }
