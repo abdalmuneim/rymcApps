@@ -60,7 +60,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "notifications": MessageLookupByLibrary.simpleMessage("الاشعارات"),
         "otpCodeSent": MessageLookupByLibrary.simpleMessage(
             "تم ارسال رمز التحقق انظر الرسائل"),
+        "phone": MessageLookupByLibrary.simpleMessage("الهاتف"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("رقم الجوال"),
+        "pressAgainToExit":
+            MessageLookupByLibrary.simpleMessage("اضغط مجددا للخروج"),
         "requiredField":
             MessageLookupByLibrary.simpleMessage("هذا الحقل مطلوب"),
         "resendOTP": MessageLookupByLibrary.simpleMessage("أعد الارسال"),

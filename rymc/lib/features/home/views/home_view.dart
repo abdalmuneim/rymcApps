@@ -38,7 +38,7 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () async => false,
+      onWillPop: read.onWillPop,
       child: Scaffold(
         body: Consumer<HomeProvider>(builder: (context, data, _) {
           return Column(

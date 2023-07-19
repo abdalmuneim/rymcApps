@@ -12,8 +12,9 @@ class RegisterProvider extends ChangeNotifier {
   IFCMNotificationFirebase _fcmNotificationFirebase;
   RegisterProvider(this._registerUseCase, this._fcmNotificationFirebase);
 
-  final GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
-  GlobalKey<FormState> get globalKey => _globalKey;
+  final GlobalKey<FormState> _globalKeyRegister =
+      GlobalKey<FormState>(debugLabel: "register");
+  GlobalKey<FormState> get globalKey => _globalKeyRegister;
   final context = NavigationService.context;
   final nationalIdTEXT = TextEditingController();
   final nameTEXT = TextEditingController();
@@ -26,7 +27,7 @@ class RegisterProvider extends ChangeNotifier {
   }
 
   register() async {
-    if (_globalKey.currentState!.validate()) {
+    if (_globalKeyRegister.currentState!.validate()) {
       FocusManager.instance.primaryFocus?.unfocus();
       _isLoading = true;
       notifyListeners();

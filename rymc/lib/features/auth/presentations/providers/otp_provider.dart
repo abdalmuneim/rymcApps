@@ -37,8 +37,9 @@ class OtpProvider extends ChangeNotifier {
       this._fcmNotificationFirebase,
       this._resendOTPUseCase);
 
-  final GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
-  GlobalKey<FormState> get globalKey => _globalKey;
+  final GlobalKey<FormState> _globalKeyOTP =
+      GlobalKey<FormState>(debugLabel: "OTP");
+  GlobalKey<FormState> get globalKey => _globalKeyOTP;
 
   final _context = NavigationService.context;
   final codeTEXT = TextEditingController();
@@ -67,6 +68,8 @@ class OtpProvider extends ChangeNotifier {
 
   _startTimer() {
     _timer = Timer.periodic(Duration(seconds: 1), (Timer timer) {
+      log("duration: ${timerDuration.inSeconds.toString()}");
+      log("timer: ${timer.tick.toString()}");
       if (timer.tick >= _maximumTimerSeconds) {
         timer.cancel();
         timerDuration = Duration(seconds: _maximumTimerSeconds);
@@ -80,7 +83,7 @@ class OtpProvider extends ChangeNotifier {
   }
 
   verificationCode() async {
-    if (_globalKey.currentState!.validate()) {
+    if (_globalKeyOTP.currentState!.validate()) {
       FocusManager.instance.primaryFocus?.unfocus();
 
       _isLoading = true;
@@ -106,6 +109,7 @@ class OtpProvider extends ChangeNotifier {
               isSigning.fold(
                 (err) => Utils.showError(err.message),
                 (User? user) async {
+                  clear();
                   if (user != null) {
                     final register = await _registerUseCase(
                       name: user.name!,
@@ -116,6 +120,7 @@ class OtpProvider extends ChangeNotifier {
                       (l) => Utils.showError(l.message),
                       (r) {
                         _context.pushReplacementNamed(RoutesStrings.home);
+
                         Utils.showSuccess(S.of(_context).welcomeBack);
                       },
                     );
@@ -138,13 +143,15 @@ class OtpProvider extends ChangeNotifier {
   }
 
   resendOTP() async {
+    _isLoadingResend = true;
+    notifyListeners();
     final result = await _resendOTPUseCase();
     result.fold(
       (l) => Utils.showError(l.message),
-      (r) async {
+      (phone) async {
         try {
           await _firebaseAuth.verifyPhoneNumber(
-            phoneNumber: r.trim(),
+            phoneNumber: phone.trim(),
             forceResendingToken: _forceResendingToken,
             codeSent: (String verificationId, int? forceResendingToken) async {
               log(" ---> Sent");
@@ -182,6 +189,7 @@ class OtpProvider extends ChangeNotifier {
 
   void clear() {
     codeTEXT.clear();
+    _timer.cancel();
   }
 
   init() {

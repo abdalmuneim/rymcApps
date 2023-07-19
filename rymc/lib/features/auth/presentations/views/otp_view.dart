@@ -76,10 +76,12 @@ class _OtpViewState extends State<OtpView> {
                             provider.timerDuration,
                         builder: (_, Duration duration, __) {
                           final int seconds = duration.inSeconds;
+                          // log(seconds.toString());
                           return TextButton(
-                            onPressed: seconds != 0 ? null : read.resendOTP(),
+                            onPressed: seconds == 120 ? read.resendOTP : null,
                             child: CustomText(
-                              text: (seconds == 0
+                              color: seconds == 120 ? AppColors.primary : null,
+                              text: (seconds == 120
                                   ? S.of(context).resendOTP
                                   : '${S.of(context).resendOTPAfter}: ${'${duration.inMinutes.getDurationReminder}:${seconds.remainder(60).getDurationReminder}'}'),
                             ),

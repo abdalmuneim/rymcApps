@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
+import 'package:rymc/common/resources/app_color.dart';
 import 'package:rymc/common/routes/routes.dart';
 import 'package:rymc/common/services/navigation_services.dart';
 import 'package:rymc/common/services/network_services.dart';
@@ -7,6 +11,7 @@ import 'package:rymc/common/utils/utils.dart';
 import 'package:rymc/features/auth/domain/entities/user.dart';
 import 'package:rymc/features/auth/domain/use_cases/get_current_user_use_case.dart';
 import 'package:rymc/features/auth/domain/use_cases/log_out_use_case.dart';
+import 'package:rymc/features/auth/presentations/providers/login_provider.dart';
 import 'package:rymc/generated/assets/assets.dart';
 import 'package:rymc/generated/l10n.dart';
 
@@ -33,7 +38,7 @@ class HomeProvider extends ChangeNotifier {
       if (r != null) {
         _user = r;
         _qrCodeData =
-            "name: ${user?.name}\nphone: ${user?.phone}\nnationalId: ${user?.nationalId}";
+            "${S.of(_context).name}: ${user?.name}\n${S.of(_context).phoneNumber}: ${user?.phone}\n${S.of(_context).nationalID}: ${user?.nationalId}";
         notifyListeners();
       }
     });
@@ -66,5 +71,25 @@ class HomeProvider extends ChangeNotifier {
             text: S.of(_context).noInternetConnection);
       }
     });
+  }
+
+  @override
+  void dispose() {
+    Provider.of<LogInProvider>(_context, listen: false).dispose();
+    super.dispose();
+  }
+
+  DateTime? currentBackPressTime;
+
+  Future<bool> onWillPop() {
+    DateTime now = DateTime.now();
+    if (currentBackPressTime == null ||
+        now.difference(currentBackPressTime!) > Duration(seconds: 2)) {
+      currentBackPressTime = now;
+      Utils.showToast(S.of(_context).pressAgainToExit,
+          backgroundColor: AppColors.black.withOpacity(.3));
+      return Future.value(false);
+    }
+    exit(0);
   }
 }
